@@ -5,12 +5,16 @@
 
 #include "Types.h"
 
-class CObject
+namespace Engine
 {
-public:
-	
-	virtual void Update(float deltaTime) {}
+	class CObject
+	{
+	public:
+		String Name;
 
-	virtual void 
-};
+		virtual void Update(float deltaTime) {}
+
+		CObject(String name) :Name(name) {}
+	};
+}
 
