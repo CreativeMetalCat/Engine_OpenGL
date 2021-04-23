@@ -41,6 +41,8 @@ namespace Engine
 
 		bool Valid()const { return !isPendingDestroy; }
 
+		bool IsOfClass(String className)const { return classInfo.Name == className; }
+
 		String Name;
 
 		virtual void Update(float deltaTime) {}

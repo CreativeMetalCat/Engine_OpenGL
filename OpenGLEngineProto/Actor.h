@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Component.h"
 
+#include "World.h"
 class CWorld;
 
 namespace Engine
@@ -12,11 +13,13 @@ namespace Engine
 			
 	protected:
 		Array<CComponent*> components = Array<CComponent*>();
-
+		
 		/*World in which actor exists*/
 		CWorld* world;
 	public:
 		CActor* Owner = nullptr;
+
+		Array<CActor*>Children = Array<CActor*>();
 
 		Vector Location;
 

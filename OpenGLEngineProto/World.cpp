@@ -12,6 +12,23 @@ inline Class* Engine::CWorld::SpawnActor(String name, CActor* owner, Args ...arg
 	return NULL;
 }
 
+Array<Engine::CActor*> Engine::CWorld::GetActorsOfClass(String className)
+{
+	if (!actors.empty())
+	{
+		Array<Engine::CActor*> result = Array<Engine::CActor*>();
+		for (int i = 0; i < actors.size(); i++)
+		{
+			if (actors[i]->IsOfClass(className))
+			{
+				result.push_back(actors[i]);
+			}
+		}
+		return result;
+	}
+	return Array<Engine::CActor*>();
+}
+
 void Engine::CWorld::Update(float deltaTime)
 {
 	/*Issue: when updating some actors might be marked as "pending kill" and will need to be deleted, when deleting array will change size
