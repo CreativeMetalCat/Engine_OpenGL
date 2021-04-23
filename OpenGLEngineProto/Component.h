@@ -1,9 +1,13 @@
 #pragma once
 #include "Object.h"
-class CActor;
+
+//#include "Actor.h"
+
 
 namespace Engine
 {
+	class CActor;
+
 	class CComponent : public CObject
 	{
 		GENERATED_CLASS_BODY(Component,Object,Engine)

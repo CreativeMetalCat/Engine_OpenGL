@@ -4,7 +4,7 @@ namespace Engine::Components
 {
 	class CRenderComponent :public CComponent
 	{
-	protected:
+	public:
 		virtual void Draw() = 0;
 	public:
 		Vector Location;

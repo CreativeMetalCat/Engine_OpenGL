@@ -38,5 +38,11 @@ void Engine::CActor::Init()
 void Engine::CActor::Update(float deltaTime)
 {
 	Super::Update(deltaTime);
-	world->GetActorsOfClass(classInfo.Name);
+	if (!components.empty())
+	{
+		for (int i = 0; i < components.size(); i++)
+		{
+			components[i]->Update(deltaTime);
+		}
+	}
 }

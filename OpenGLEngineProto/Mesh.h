@@ -1,14 +1,14 @@
 #pragma once
-#include <vector>
-#include <GL/glew.h>
+#define USE_DEFAULT_CPP
+#include "Types.h"
 
 struct MeshData
 {
-	std::vector<GLfloat>Verticies;
+	Array<GLfloat>Verticies;
 
-	std::vector<GLfloat>UVs;
+	Array<GLfloat>UVs;
 
-	std::vector<GLfloat> Normals;
+	Array<GLfloat> Normals;
 
 	bool QuadMesh = false;
 

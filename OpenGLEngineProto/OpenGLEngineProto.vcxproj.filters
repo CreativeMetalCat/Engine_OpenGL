@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Components\Render">
       <UniqueIdentifier>{7ead9bc8-7268-44eb-a6a6-da7f186f8b75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{b24cb8aa-dcc5-464d-8f0a-117593cd9269}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -178,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="StaticMeshComponent.h">
       <Filter>Components\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="LightData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadedMeshData.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

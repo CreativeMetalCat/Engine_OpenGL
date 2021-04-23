@@ -18,6 +18,8 @@ typedef glm::vec3 Vector;
 //Vector of 2 float variables
 typedef glm::vec2 Vector2;
 
+typedef glm::vec3 Color;
+
 typedef std::string String;
 
 template<class Type> 

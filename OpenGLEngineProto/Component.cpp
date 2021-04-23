@@ -1,4 +1,5 @@
 #include "Component.h"
+//#include "Actor.h"
 
 Engine::CComponent::CComponent(String name, CActor* owner)
 	:CObject(name),Owner(owner)

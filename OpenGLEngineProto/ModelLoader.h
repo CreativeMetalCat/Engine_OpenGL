@@ -3,21 +3,10 @@
 #include <vector>
 #include <GL/glew.h>
 #include <iostream>
-#include "Mesh.h"
+#include "LoadedMeshData.h"
 #include <glm/glm.hpp>
 
-struct LoadedMeshData
-{
-	MeshData Data;
 
-	glm::vec3 RelativeLocation;
-
-	glm::vec3 RelativeRotation;
-
-	float Scale = 1;
-
-	std::vector<std::string> MaterialNames;
-};
 class ModelLoader
 {
 

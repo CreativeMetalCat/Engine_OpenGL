@@ -12,12 +12,14 @@ namespace Engine
 		GENERATED_CLASS_BODY(Actor,Object,Engine)
 			
 	protected:
-		Array<CComponent*> components = Array<CComponent*>();
+		Array<CComponent*> components  = Array<CComponent*>();
 		
 		/*World in which actor exists*/
 		CWorld* world;
 	public:
 		CActor* Owner = nullptr;
+
+		CWorld* GetWorld()const { return world; }
 
 		Array<CActor*>Children = Array<CActor*>();
 
