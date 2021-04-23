@@ -161,6 +161,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="openFBXLoader\miniz.c" />
     <ClCompile Include="openFBXLoader\ofbx.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="World.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="openFBXLoader\miniz.h" />
     <ClInclude Include="openFBXLoader\ofbx.h" />
+    <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RenderObject.hpp" />
     <ClInclude Include="ShaderLoader.hpp" />
     <ClInclude Include="Shapes.hpp" />

@@ -10,6 +10,12 @@ namespace Engine
 
 	public:
 		template<class Class, class ... Args> Class* SpawnActor(String name,CActor*owner = nullptr, Args ... args);
+
+		virtual void Update(float deltaTime);
+
+		virtual void Init();
+
+		~CWorld();
 	};
 }
 

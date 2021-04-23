@@ -10,6 +10,8 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 
+
+
 //Vector of 3 float variables
 typedef glm::vec3 Vector;
 
@@ -21,3 +23,12 @@ typedef std::string String;
 template<class Type> 
 using Array = std::vector<Type>;
 #endif // USE_DEFAULT_CPP
+
+typedef unsigned int uint;
+
+enum Constants
+{
+	Index_None  = -1
+};
+
+#define INDEX_NONE Contstants::Index_None

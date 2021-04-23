@@ -9,13 +9,15 @@ namespace Engine
 	protected:
 		Array<CComponent*> components = Array<CComponent*>();
 
-		CActor* owner = nullptr;
+		
 	public:
-		CActor* GetOwner()const { return owner; }
+		CActor* Owner = nullptr;
 
 		Vector Location;
 
 		Vector Rotation;
+
+		Vector Scale;
 		
 		CActor(String name, CActor* owner = nullptr);
 

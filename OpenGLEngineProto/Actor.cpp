@@ -12,14 +12,14 @@ inline Class* Engine::CActor::AddComponent(String name, Args ...args)
 	return NULL;
 }
 
-Engine::CActor::CActor(String name, CActor* _owner):CObject(name), owner(_owner)
+Engine::CActor::CActor(String name, CActor* _owner):CObject(name), Owner(_owner)
 {
 	classInfo.Name = "Actor";
 	classInfo.Parent = "Object";
 }
 
 Engine::CActor::CActor(String name, Vector location, Vector rotation, CActor* _owner)
-	: CObject(name), Location(location),Rotation(rotation), owner(_owner)
+	: CObject(name), Location(location),Rotation(rotation), Owner(_owner)
 {
 	classInfo.Name = "Actor";
 	classInfo.Parent = "Object";
