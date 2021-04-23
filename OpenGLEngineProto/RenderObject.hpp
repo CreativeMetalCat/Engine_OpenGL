@@ -19,7 +19,8 @@ public:
 	std::vector<Light> lights;
 };
 
-class CRenderObject
+
+class /*[[deprecated("RenderObject is deprecated and is replaced by StaticMeshComponent")]]*/  CRenderObject
 {
 protected:
 

@@ -5,7 +5,7 @@ Engine::CComponent::CComponent(String name, CActor* owner)
 {
 	if (owner)
 	{
-		//do stuff
+		set_class_data_generated();
 	}
 	else
 	{

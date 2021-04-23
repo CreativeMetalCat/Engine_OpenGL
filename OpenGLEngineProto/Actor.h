@@ -2,14 +2,19 @@
 #include "Object.h"
 #include "Component.h"
 
+class CWorld;
+
 namespace Engine
 {
-	class CActor :public Engine::CObject
+	class CActor :public CObject
 	{
+		GENERATED_CLASS_BODY(Actor,Object,Engine)
+			
 	protected:
 		Array<CComponent*> components = Array<CComponent*>();
 
-		
+		/*World in which actor exists*/
+		CWorld* world;
 	public:
 		CActor* Owner = nullptr;
 
@@ -19,12 +24,17 @@ namespace Engine
 
 		Vector Scale;
 		
-		CActor(String name, CActor* owner = nullptr);
+		CActor(String name, CWorld* world, CActor* owner = nullptr);
 
-		CActor(String name, Vector Location, Vector Rotation, CActor* owner = nullptr);
+		CActor(String name, CWorld* world, Vector Location, Vector Rotation, CActor* owner = nullptr);
 
 		//Creates and saves a component
 		template<class Class, class ... Args> Class* AddComponent(String name, Args...args);
+
+		// Inherited via CObject
+		virtual void Init() override;
+
+		virtual void Update(float deltaTime);
 	};
 	
 }

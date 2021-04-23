@@ -164,6 +164,7 @@
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="StaticMeshComponent.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="RenderObject.hpp" />
     <ClInclude Include="ShaderLoader.hpp" />
     <ClInclude Include="Shapes.hpp" />
+    <ClInclude Include="StaticMeshComponent.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

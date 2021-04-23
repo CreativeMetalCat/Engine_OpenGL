@@ -5,6 +5,14 @@
 
 #include "Types.h"
 
+#ifndef GENERATED_CLASS_BODY
+#define GENERATED_CLASS_BODY(name,parentName,Namespace)\
+void set_class_data_generated(){classInfo.Name = #name;classInfo.Parent = #parentName;}\
+typedef Namespace::##C##parentName Super;
+#endif // !GENERATED_CLASS_BODY
+
+
+
 namespace Engine
 {
 	/*
