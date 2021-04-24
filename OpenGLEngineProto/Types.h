@@ -31,6 +31,8 @@ using Array = std::vector<Type>;
 template <class Type1,class Type2>
 using Map = std::vector<std::pair<Type1, Type2>>;
 
+/*An array of bytes. Typing word image is much faster then unsigned char* so that's the only reason why this exists*/
+typedef unsigned char* Image;
 
 enum Constants
 {

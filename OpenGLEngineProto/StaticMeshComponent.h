@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "RenderComponent.h"
 #include "LoadedMeshData.h"
+#include "Material.h"
 
 struct Shader;
 namespace Engine::Components
