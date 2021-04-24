@@ -81,7 +81,7 @@ bool Engine::CGame::CreateWindow(std::string name, int height, int width)
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Hide the mouse and enable unlimited mouvement
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, MouseMode::Normal);
 }
 
 void Engine::CGame::Run()
@@ -89,10 +89,9 @@ void Engine::CGame::Run()
 	do
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
 		if (!worlds.empty())
 		{
+			
 			// glfwGetTime is called only once, the first time this function is called
 			static double lastTime = glfwGetTime();
 
@@ -111,6 +110,10 @@ void Engine::CGame::Run()
 			//break;
 		}
 
+		// Swap buffers
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+
 	} while (glfwWindowShouldClose(window) == 0);
 }
 
@@ -127,4 +130,11 @@ Engine::CGame::~CGame()
 	{
 		delete worlds[i];
 	}
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
 }
