@@ -3,15 +3,13 @@
 Engine::Components::CRenderComponent::CRenderComponent(String name, CActor* owner, Vector location, Vector rotation, Vector scale)
 	:CComponent(name,owner), Location(location), Rotation(rotation),Scale(scale)
 {
-	classInfo.Name = "RenderComponent";
-	classInfo.Parent = "Component";
+	set_class_data_generated();
 }
 
 Engine::Components::CRenderComponent::CRenderComponent(String name, CActor* owner)
 	:CComponent(name, owner)
 {
-	classInfo.Name = "RenderComponent";
-	classInfo.Parent = "Component";
+	set_class_data_generated();
 }
 
 void Engine::Components::CRenderComponent::Update(float deltaTime)

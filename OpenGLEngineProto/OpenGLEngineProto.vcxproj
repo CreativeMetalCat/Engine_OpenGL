@@ -149,6 +149,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="CameraPlayer.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="CameraPlayer.hpp" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
@@ -191,6 +193,7 @@
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="RenderObject.hpp" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.hpp" />
     <ClInclude Include="Shapes.hpp" />
     <ClInclude Include="StaticMeshComponent.h" />

@@ -28,20 +28,23 @@
     <Filter Include="json">
       <UniqueIdentifier>{790dc823-e10b-4720-a931-fd9747706fbe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{00978a7d-4c75-49cb-afb0-f4ca4a503ac3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Render">
-      <UniqueIdentifier>{a6366598-3afe-4421-a293-cebf65c35736}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{998cb7a5-5fc8-41dd-ba70-850693996ec2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Components\Render">
       <UniqueIdentifier>{7ead9bc8-7268-44eb-a6a6-da7f186f8b75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data">
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{a571f6b6-0c50-4fe6-98c2-d03521973ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
       <UniqueIdentifier>{b24cb8aa-dcc5-464d-8f0a-117593cd9269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{00978a7d-4c75-49cb-afb0-f4ca4a503ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Render">
+      <UniqueIdentifier>{a6366598-3afe-4421-a293-cebf65c35736}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="StaticMeshComponent.cpp">
       <Filter>Source Files\Components\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,22 +180,28 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>Components\Render</Filter>
+      <Filter>Header Files\Components\Render</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshComponent.h">
-      <Filter>Components\Render</Filter>
+      <Filter>Header Files\Components\Render</Filter>
     </ClInclude>
     <ClInclude Include="RenderData.h">
-      <Filter>Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="LightData.h">
-      <Filter>Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="LoadedMeshData.h">
-      <Filter>Data</Filter>
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

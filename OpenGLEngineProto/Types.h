@@ -22,11 +22,12 @@ typedef glm::vec3 Color;
 
 typedef std::string String;
 
+typedef GLuint uint;
+
 template<class Type> 
 using Array = std::vector<Type>;
 #endif // USE_DEFAULT_CPP
 
-typedef unsigned int uint;
 
 enum Constants
 {
