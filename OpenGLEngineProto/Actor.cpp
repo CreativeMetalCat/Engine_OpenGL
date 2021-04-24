@@ -47,7 +47,10 @@ void Engine::CActor::Update(float deltaTime)
 
 			if (components[i]->GetClass().Category == "RenderComponents")
 			{
-				OnComponentDraw(static_cast<Components::CRenderComponent*>(components[i]));
+				Components::CRenderComponent* temp = static_cast<Components::CRenderComponent*>(components[i]);
+				temp->BeingDraw();
+				OnComponentDraw(temp);
+				temp->EndDraw();
 			}
 		}
 	}
