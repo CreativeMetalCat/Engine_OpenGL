@@ -21,3 +21,8 @@ Shader* Engine::CGame::GetShader(String name) const
 
     return nullptr;
 }
+
+Material::Material* Engine::CGame::GetMaterial(String name) const
+{
+    return nullptr;
+}

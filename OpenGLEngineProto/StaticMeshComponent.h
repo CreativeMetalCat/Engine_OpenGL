@@ -24,22 +24,29 @@ namespace Engine::Components
         /*Buffer for mesh's uv data*/
         uint uvBuffer;
 
+        /*Buffer for mesh's verticies normals data*/
+        uint normalsBuffer;
+
         uint shaderProgramId;
 #pragma endregion
 
         LoadedMeshData mesh;
 
         Shader shader;
+
+        Material::Material* material;
     public:
         Shader GetShader()const;
 
-        CStaticMeshComponent(String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
+        CStaticMeshComponent(Material::Material* material,String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
 
-        CStaticMeshComponent(String shaderName, String name, CActor* owner);
+        CStaticMeshComponent(Material::Material* material,String shaderName, String name, CActor* owner);
 
         // Inherited via CRenderComponent
         virtual void EndDraw() override;
         virtual void BeingDraw()override;
+
+        ~CStaticMeshComponent();
     };
 }
 

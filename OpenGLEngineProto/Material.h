@@ -27,5 +27,7 @@ namespace Engine::Material
 		> Second string is texture path 
 		*/
 		Material(Map<String, String>textures);
+
+		~Material();
 	};
 }

@@ -95,3 +95,15 @@ Engine::Material::Material::Material(Map<String, String> textures)
 		}
 	}
 }
+
+Engine::Material::Material::~Material()
+{
+	if (!textureData.empty())
+	{
+		for (int i = 0; i < (textureData.size()); i++)
+		{
+			glDeleteTextures(1, &textureData[i].second);
+		}
+	}
+	textureData.~vector();
+}
