@@ -4,7 +4,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-
+#if 0
 CRenderObject::CRenderObject(MeshData mesh,std::string textureName, std::string shaderName)
 	:Mesh(mesh), TextureName(textureName), ShaderName(shaderName)
 {
@@ -188,3 +188,4 @@ void CRenderObject::Update(float deltaTime)
 {
 	
 }
+#endif

@@ -5,9 +5,10 @@
 * This will be filled as time goes
 */
 #ifdef USE_DEFAULT_CPP
+#endif // USE_DEFAULT_CPP
 #include <glm/glm.hpp>
 #include <iostream>
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <vector>
 
 
@@ -22,11 +23,13 @@ typedef glm::vec3 Color;
 
 typedef std::string String;
 
-typedef GLuint uint;
+typedef unsigned int  uint;
 
 template<class Type> 
 using Array = std::vector<Type>;
-#endif // USE_DEFAULT_CPP
+
+template <class Type1,class Type2>
+using Map = std::vector<std::pair<Type1, Type2>>;
 
 
 enum Constants

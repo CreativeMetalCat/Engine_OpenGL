@@ -1,4 +1,16 @@
 #include "ShaderLoader.hpp"
+#include <GL/glew.h>
+
+// Include standard headers
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <sstream>
 
 GLuint Helpers::LoadShaders(const char* vertex_file_path, const char* fragment_file_path) 
 {

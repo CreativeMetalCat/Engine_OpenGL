@@ -4,15 +4,15 @@
 
 struct MeshData
 {
-	Array<GLfloat>Verticies;
+	Array<float>Verticies;
 
-	Array<GLfloat>UVs;
+	Array<float>UVs;
 
-	Array<GLfloat> Normals;
+	Array<float> Normals;
 
 	bool QuadMesh = false;
 
-	MeshData(std::vector<GLfloat>verticies, std::vector<GLfloat>_UVs)
+	MeshData(std::vector<float>verticies, std::vector<float>_UVs)
 		:Verticies(verticies), UVs(_UVs)
 	{
 

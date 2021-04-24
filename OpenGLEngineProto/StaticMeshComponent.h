@@ -1,12 +1,14 @@
 #pragma once
+#include "Shader.h"
 #include "RenderComponent.h"
 #include "LoadedMeshData.h"
 
+struct Shader;
 namespace Engine::Components
 {
     class CStaticMeshComponent : public CRenderComponent
     {
-        GENERATED_CLASS_BODY(StaticMeshComponent, RenderComponent, Engine::Components)
+        GENERATED_CLASS_BODY(StaticMeshComponent, RenderComponent,RenderComponents, Engine::Components)
     protected:
 #pragma region ShaderData
         /*These are constant and set when shader is loaded, used to simplfy setting this kind of data*/
@@ -25,8 +27,16 @@ namespace Engine::Components
 #pragma endregion
 
         LoadedMeshData mesh;
+
+        Shader shader;
     public:
+        Shader GetShader()const;
+
         void Draw() override;
+
+        CStaticMeshComponent(String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
+
+        CStaticMeshComponent(String shaderName, String name, CActor* owner);
     };
 }
 

@@ -9,7 +9,7 @@ namespace Engine
 {
 	class CActor :public CObject
 	{
-		GENERATED_CLASS_BODY(Actor,Object,Engine)
+		GENERATED_CLASS_BODY(Actor,Object,Base,Engine)
 			
 	protected:
 		Array<CComponent*> components  = Array<CComponent*>();

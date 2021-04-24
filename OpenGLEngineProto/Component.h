@@ -10,7 +10,7 @@ namespace Engine
 
 	class CComponent : public CObject
 	{
-		GENERATED_CLASS_BODY(Component,Object,Engine)
+		GENERATED_CLASS_BODY(Component,Object,Base,Engine)
 	protected:
 		
 	public:

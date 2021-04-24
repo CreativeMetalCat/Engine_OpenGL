@@ -6,7 +6,7 @@ namespace Engine::Components
 {
 	class CRenderComponent :public CComponent
 	{
-		GENERATED_CLASS_BODY(RenderComponent,Component, Engine)
+		GENERATED_CLASS_BODY(RenderComponent,Component, RenderComponents, Engine)
 	protected:
 		
 	public:
