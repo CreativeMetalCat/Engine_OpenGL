@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "RenderComponent.h"
 
 template<class Class, class ...Args>
 inline Class* Engine::CActor::AddComponent(String name, Args ...args)
@@ -43,6 +44,15 @@ void Engine::CActor::Update(float deltaTime)
 		for (int i = 0; i < components.size(); i++)
 		{
 			components[i]->Update(deltaTime);
+
+			if (components[i]->GetClass().Category == "RenderComponents")
+			{
+				OnComponentDraw(static_cast<Components::CRenderComponent*>(components[i]));
+			}
 		}
 	}
+}
+
+void Engine::CActor::OnComponentDraw(Components::CRenderComponent* comp)
+{
 }

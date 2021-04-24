@@ -11,11 +11,6 @@ Shader Engine::Components::CStaticMeshComponent::GetShader() const
 	return shader;
 }
 
-void Engine::Components::CStaticMeshComponent::Draw()
-{
-	Owner->GetWorld()->GetCurrentRenderData();
-}
-
 Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String shaderName, String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale)
 	:Components::CRenderComponent(name,owner,Location,Rotation,Scale)
 {
@@ -38,4 +33,13 @@ Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String shaderName
 			shader = *sh;
 		}
 	}
+}
+
+void Engine::Components::CStaticMeshComponent::EndDraw()
+{
+}
+
+void Engine::Components::CStaticMeshComponent::BeingDraw()
+{
+	Owner->GetWorld()->GetCurrentRenderData();
 }

@@ -32,11 +32,13 @@ namespace Engine::Components
     public:
         Shader GetShader()const;
 
-        void Draw() override;
-
         CStaticMeshComponent(String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
 
         CStaticMeshComponent(String shaderName, String name, CActor* owner);
+
+        // Inherited via CRenderComponent
+        virtual void EndDraw() override;
+        virtual void BeingDraw()override;
     };
 }
 

@@ -10,7 +10,9 @@ namespace Engine::Components
 	protected:
 		
 	public:
-		virtual void Draw() = 0;
+		virtual void BeingDraw() = 0;
+
+		virtual void EndDraw() = 0;
 
 		Vector Location;
 

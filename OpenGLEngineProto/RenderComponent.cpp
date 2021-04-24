@@ -14,7 +14,7 @@ Engine::Components::CRenderComponent::CRenderComponent(String name, CActor* owne
 
 void Engine::Components::CRenderComponent::Update(float deltaTime)
 {
-	Draw();
+	
 }
 
 void Engine::Components::CRenderComponent::Init()

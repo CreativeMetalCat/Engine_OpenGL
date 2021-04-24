@@ -7,6 +7,11 @@ class CWorld;
 
 namespace Engine
 {
+	namespace Components
+	{
+		class CRenderComponent;
+	}
+
 	class CActor :public CObject
 	{
 		GENERATED_CLASS_BODY(Actor,Object,Base,Engine)
@@ -40,6 +45,10 @@ namespace Engine
 		virtual void Init() override;
 
 		virtual void Update(float deltaTime);
+
+		/*Called when *any* render component is drawn.
+		Use this function to set values in shaders*/
+		virtual void OnComponentDraw(Components::CRenderComponent* comp);
 	};
 	
 }
