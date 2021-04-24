@@ -9,7 +9,11 @@ namespace Engine::Components
 {
     class CStaticMeshComponent : public CRenderComponent
     {
-        GENERATED_CLASS_BODY(StaticMeshComponent, RenderComponent,RenderComponents, Engine::Components)
+        GENERATED_CLASS_BODY(StaticMeshComponent, RenderComponent, RenderComponents, Engine::Components)
+    private:
+            void construct(Material::Material* material, String shaderName);
+
+            glm::mat4 getModelMatrix()const;
     protected:
 #pragma region ShaderData
         /*These are constant and set when shader is loaded, used to simplfy setting this kind of data*/
@@ -28,6 +32,15 @@ namespace Engine::Components
         uint normalsBuffer;
 
         uint shaderProgramId;
+
+        /*Id of uniform value for model's martix in shader*/
+        GLuint modelViewPerspectiveMatrixId;
+
+        /*Id of uniform value for model's martix in shader*/
+        GLuint modelMatrixId;
+
+        /*Id of uniform value for camera view's martix in shader*/
+        GLuint viewMatrixId;
 #pragma endregion
 
         LoadedMeshData mesh;
@@ -38,9 +51,9 @@ namespace Engine::Components
     public:
         Shader GetShader()const;
 
-        CStaticMeshComponent(Material::Material* material,String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
+        CStaticMeshComponent(Material::Material* material,LoadedMeshData mesh,String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
 
-        CStaticMeshComponent(Material::Material* material,String shaderName, String name, CActor* owner);
+        CStaticMeshComponent(Material::Material* material, LoadedMeshData mesh, String shaderName, String name, CActor* owner);
 
         // Inherited via CRenderComponent
         virtual void EndDraw() override;
