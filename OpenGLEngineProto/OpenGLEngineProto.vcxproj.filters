@@ -49,6 +49,15 @@
     <Filter Include="Source Files\Materials">
       <UniqueIdentifier>{87e1fd60-44c2-4651-a5a8-f74be6045e16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{ac13ff29-b756-4795-99fa-d04c69a423bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{7e145dc0-4301-44c9-ad7a-66acc81bd42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controls">
+      <UniqueIdentifier>{e8be4577-5d07-457e-9537-f05387054b22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -111,11 +120,11 @@
     <ClCompile Include="StaticMeshComponent.cpp">
       <Filter>Source Files\Components\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,11 +215,14 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlTypes.h">
+      <Filter>Header Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

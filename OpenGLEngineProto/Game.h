@@ -2,15 +2,21 @@
 #include "Shader.h"
 #include "Material.h"
 #include "World.h"
+#include "ControlTypes.h"
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
 	/*This is the class that represents the game.
 	This class manages worlds, shaders, window creation etc.
+	*Functions must be called in this order
+	* CreateWindow
 	*/
 	class CGame
 	{
 	protected:
+		GLFWwindow* window;
+
 		/*Worlds that are currently loaded*/
 		Array<CWorld*>worlds = Array<CWorld*>();
 
@@ -30,6 +36,14 @@ namespace Engine
 		* note: if no material with this name is currently loaded -> it will be loaded
 		*/
 		Material::Material* GetMaterial(String name)const;
+
+		/*Creates window and does basic setup*/
+		bool CreateWindow(std::string name, int height = 1028,int width = 768);
+
+		/*This is where the game will be happening, once this function exists execution -> that means that the game needs to be closed*/
+		void Run();
+
+		void SetMouseMode(MouseMode mode);
 	};
 }
 

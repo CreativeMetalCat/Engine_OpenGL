@@ -173,6 +173,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="CameraPlayer.hpp" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ControlTypes.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
