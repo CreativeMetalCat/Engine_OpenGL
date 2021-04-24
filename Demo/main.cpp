@@ -1,8 +1,11 @@
 #define USE_DEFAULT_CPP
-#include <Types.h>
+#include "Game.h"
 
 int main()
 {
-	String string;
+	Engine::CGame* game = new Engine::CGame();
+	game->CreateWindow("game");
+	game->Run();
+
 	return 0;
 }

@@ -5,6 +5,9 @@
 #include "ControlTypes.h"
 #include <GLFW/glfw3.h>
 
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 namespace Engine
 {
 	/*This is the class that represents the game.
@@ -44,6 +47,8 @@ namespace Engine
 		void Run();
 
 		void SetMouseMode(MouseMode mode);
+
+		~CGame();
 	};
 }
 

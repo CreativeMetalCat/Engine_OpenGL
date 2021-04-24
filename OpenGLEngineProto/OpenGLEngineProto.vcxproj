@@ -93,12 +93,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\openFBXLoader;$(ProjectDir)\tinyobj;$(ProjectDir)\stb;$(ProjectDir)\glm;$(ProjectDir)\glew-2.2.0\include;$(ProjectDir)\glfw-3.3.4\include;$(ProjectDir)\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glew32d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\assimp\lib\Release;$(ProjectDir)\glew-2.2.0\lib\Release\Win32;$(ProjectDir)\glew-2.2.0\lib\Debug\Win32;$(ProjectDir)\glfw-3.3.4\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\glew-2.2.0\lib\Release\Win32;$(ProjectDir)\glew-2.2.0\lib\Debug\Win32;$(ProjectDir)\glfw-3.3.4\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

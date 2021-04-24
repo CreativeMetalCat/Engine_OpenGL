@@ -4,8 +4,7 @@
 #include <algorithm>
 
 
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
+
 
 Shader* Engine::CGame::GetShader(String name) const
 {
@@ -109,7 +108,7 @@ void Engine::CGame::Run()
 		else
 		{
 			//no worlds -> no game
-			break;
+			//break;
 		}
 
 	} while (glfwWindowShouldClose(window) == 0);
@@ -119,4 +118,13 @@ void Engine::CGame::SetMouseMode(MouseMode mode)
 {
 	// Hide the mouse and enable unlimited mouvement
 	glfwSetInputMode(window, GLFW_CURSOR, mode);
+}
+
+Engine::CGame::~CGame()
+{
+	const uint count = worlds.size();
+	for (int i = count - 1; i > Index_None; --i)
+	{
+		delete worlds[i];
+	}
 }
