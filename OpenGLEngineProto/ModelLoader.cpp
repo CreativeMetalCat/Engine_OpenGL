@@ -98,7 +98,8 @@ MeshData ModelLoader::LoadModel_tinyOBJ(std::string filepath, float scale)
 
 LoadedMeshData ModelLoader::LoadModel_openFBX(std::string filepath, float scale)
 {
-   return LoadModelFromScene(filepath, scale)[0];
+    auto meshes = LoadModelFromScene(filepath, scale);
+    return meshes.empty() ? LoadedMeshData() : meshes[0];
 }
 
 std::vector<LoadedMeshData> ModelLoader::LoadModelFromScene_openFBX(std::string filepath, float scale)
