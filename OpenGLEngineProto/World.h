@@ -31,5 +31,18 @@ namespace Engine
 
 		~CWorld();
 	};
+
+	template<class Class, class ... Args>
+	inline Class* CWorld::SpawnActor(String name, CActor* owner, Args ... args)
+	{
+		Class* actor = new Class(name, this, owner, args...);
+		if (actor)
+		{
+			actors.push_back(actor);
+			return actor;
+		}
+		return NULL;
+
+	}
 }
 

@@ -3,10 +3,11 @@
 #include "Component.h"
 
 #include "World.h"
-class CWorld;
+
 
 namespace Engine
 {
+	class CWorld;
 	namespace Components
 	{
 		class CRenderComponent;
@@ -33,10 +34,8 @@ namespace Engine
 		Vector Rotation;
 
 		Vector Scale;
-		
-		CActor(String name, CWorld* world, CActor* owner = nullptr);
 
-		CActor(String name, CWorld* world, Vector Location, Vector Rotation, CActor* owner = nullptr);
+		CActor(String name, CWorld* world, CActor* owner = nullptr, Vector Location = Vector(0), Vector Rotation = Vector(0));
 
 		//Creates and saves a component
 		template<class Class, class ... Args> Class* AddComponent(String name, Args...args);

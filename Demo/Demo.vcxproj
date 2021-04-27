@@ -100,9 +100,14 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\glew-2.2.0\lib\Release\Win32;$(ProjectDir)\glew-2.2.0\lib\Debug\Win32;$(ProjectDir)\glfw-3.3.4\lib-vc2019;$(SolutionDir)\Engine\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32d.lib;opengl32.lib;glfw3.lib;PacificEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\glew-2.2.0\lib\Debug\Win32;$(ProjectDir)\glfw-3.3.4\lib-vc2019;$(SolutionDir)\Engine\Debug;$(ProjectDir)\glew-2.2.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;glew32d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

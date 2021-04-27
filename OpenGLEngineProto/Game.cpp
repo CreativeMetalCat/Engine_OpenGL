@@ -117,6 +117,26 @@ void Engine::CGame::Run()
 	} while (glfwWindowShouldClose(window) == 0);
 }
 
+bool Engine::CGame::AddWorld(Engine::CWorld* world)
+{
+	if (worlds.empty())
+	{
+		world->game = this;
+		worlds.push_back(world);
+		return true;
+	}
+	else
+	{
+		if (worlds.end() == std::find(worlds.begin(), worlds.end(), world))
+		{
+			world->game = this;
+			worlds.push_back(world);
+			return true;
+		}
+	}
+	return false;
+}
+
 void Engine::CGame::SetMouseMode(MouseMode mode)
 {
 	// Hide the mouse and enable unlimited mouvement

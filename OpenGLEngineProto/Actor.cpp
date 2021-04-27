@@ -1,5 +1,6 @@
 #include "Actor.h"
 #include "RenderComponent.h"
+#include "World.h"
 
 template<class Class, class ...Args>
 inline Class* Engine::CActor::AddComponent(String name, Args ...args)
@@ -14,12 +15,7 @@ inline Class* Engine::CActor::AddComponent(String name, Args ...args)
 	return NULL;
 }
 
-Engine::CActor::CActor(String name, CWorld* _world, CActor* _owner):CObject(name), Owner(_owner),world(_world)
-{
-	set_class_data_generated();
-}
-
-Engine::CActor::CActor(String name, CWorld* _world, Vector location, Vector rotation, CActor* _owner)
+Engine::CActor::CActor(String name, CWorld* _world,  CActor* _owner,Vector location, Vector rotation)
 	: CObject(name), Location(location),Rotation(rotation), Owner(_owner), world(_world)
 {
 	set_class_data_generated();

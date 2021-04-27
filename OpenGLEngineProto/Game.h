@@ -35,6 +35,11 @@ namespace Engine
 		*/
 		Shader* GetShader(String name)const;
 
+		/*Adds world to current world pool
+		* IF world is already in the pool returns false
+		*/
+		bool AddWorld(CWorld* world);
+
 		/* Returns material that has this name
 		* note: if no material with this name is currently loaded -> it will be loaded
 		*/
