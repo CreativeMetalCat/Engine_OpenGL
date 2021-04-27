@@ -58,6 +58,12 @@
     <Filter Include="Header Files\Controls">
       <UniqueIdentifier>{e8be4577-5d07-457e-9537-f05387054b22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Camera">
+      <UniqueIdentifier>{f5cb24f2-b5c0-4ef9-a739-c6bfeef8773e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Camera">
+      <UniqueIdentifier>{73b82ddc-e6f5-4052-bc4d-ac838501f684}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Source Files\Components\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="ControlTypes.h">
       <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Header Files\Components\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

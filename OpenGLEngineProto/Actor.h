@@ -35,6 +35,14 @@ namespace Engine
 
 		Vector Scale;
 
+		Vector GetForwardVector() const;
+
+		Vector GetRightVector() const;
+
+		Vector GetWorldLocation()const;
+
+		Vector GetWorldRotation()const;
+
 		CActor(String name, CWorld* world, CActor* owner = nullptr, Vector Location = Vector(0), Vector Rotation = Vector(0));
 
 		//Creates and saves a component

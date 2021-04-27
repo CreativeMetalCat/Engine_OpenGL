@@ -1,4 +1,15 @@
 #include "RenderComponent.h"
+#include "Actor.h"
+
+Vector Engine::Components::CRenderComponent::GetWorldLocation() const
+{
+	return Owner->GetWorldLocation() + Location;
+}
+
+Vector Engine::Components::CRenderComponent::GetWorldRotation() const
+{
+	return Owner->GetWorldRotation() + Rotation;
+}
 
 Engine::Components::CRenderComponent::CRenderComponent(String name, CActor* owner, Vector location, Vector rotation, Vector scale)
 	:CComponent(name,owner), Location(location), Rotation(rotation),Scale(scale)

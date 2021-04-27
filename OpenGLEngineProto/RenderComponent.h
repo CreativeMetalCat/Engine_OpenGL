@@ -4,6 +4,7 @@
 
 namespace Engine::Components
 {
+	/*Render component is base class for components that need to have world location and rotation*/
 	class CRenderComponent :public CComponent
 	{
 		GENERATED_CLASS_BODY(RenderComponent,Component, RenderComponents, Engine)
@@ -19,6 +20,10 @@ namespace Engine::Components
 		Vector Rotation;
 
 		Vector Scale;
+
+		Vector GetWorldLocation()const;
+
+		Vector GetWorldRotation()const;
 		
 		CRenderComponent(String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
 

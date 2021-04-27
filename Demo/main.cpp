@@ -15,7 +15,7 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 	world->game = game;
 
 
-	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(0), Vector(0));
+	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(1), Vector(0));
 	Components::CStaticMeshComponent* comp1 = new Components::CStaticMeshComponent(new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 0.01f), "color", "static", chair);
 
 	CActor* floor = world->SpawnActor<CActor>(std::string("floor"),nullptr, Vector(0), Vector(0));

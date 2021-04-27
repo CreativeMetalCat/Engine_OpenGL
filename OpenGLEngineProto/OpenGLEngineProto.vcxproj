@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraPlayer.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraPlayer.hpp" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ControlTypes.h" />

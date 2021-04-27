@@ -21,6 +21,9 @@ typedef glm::vec2 Vector2;
 
 typedef glm::vec3 Color;
 
+//4x4 float martix
+typedef glm::mat4 Matrix;
+
 typedef std::string String;
 
 typedef unsigned int  uint;
