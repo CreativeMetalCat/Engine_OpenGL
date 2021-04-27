@@ -25,7 +25,7 @@ namespace Engine::Components
 
 		Vector GetWorldRotation()const;
 		
-		CRenderComponent(String name, CActor* owner, Vector Location = Vector(1), Vector Rotation = Vector(1), Vector Scale = Vector(1));
+		CRenderComponent(String name, CActor* owner, Vector Location = Vector(0), Vector Rotation = Vector(0), Vector Scale = Vector(1));
 
 		CRenderComponent(String name, CActor* owner);
 
