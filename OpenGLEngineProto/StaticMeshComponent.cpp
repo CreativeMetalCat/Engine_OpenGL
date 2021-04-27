@@ -74,16 +74,10 @@ Shader Engine::Components::CStaticMeshComponent::GetShader() const
 	return shader;
 }
 
-Engine::Components::CStaticMeshComponent::CStaticMeshComponent(Material::Material* material, LoadedMeshData _mesh, String shaderName, String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale)
+Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String name, CActor* owner,Material::Material* material, LoadedMeshData _mesh, String shaderName, Vector Location, Vector Rotation, Vector Scale)
 	:Components::CRenderComponent(name,owner,Location,Rotation,Scale),mesh(_mesh)
 {
 	construct(material,shaderName);
-}
-
-Engine::Components::CStaticMeshComponent::CStaticMeshComponent(Material::Material* material, LoadedMeshData _mesh, String shaderName, String name, CActor* owner)
-	:Components::CRenderComponent(name, owner), mesh(_mesh)
-{
-	construct(material, shaderName);
 }
 
 void Engine::Components::CStaticMeshComponent::EndDraw()

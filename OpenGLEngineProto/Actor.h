@@ -58,5 +58,17 @@ namespace Engine
 		virtual void OnComponentDraw(Components::CRenderComponent* comp);
 	};
 	
+	template<class Class, class ...Args>
+	inline Class* CActor::AddComponent(String name, Args ...args)
+	{
+		Class* comp = new Class(name,this, args...);
+		if (comp)
+		{
+			components.push_back(comp);
+			return comp;
+		}
+		return NULL;
+	}
+
 }
 

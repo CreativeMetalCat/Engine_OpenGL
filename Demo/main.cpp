@@ -16,10 +16,10 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 
 
 	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(1), Vector(0));
-	Components::CStaticMeshComponent* comp1 = new Components::CStaticMeshComponent(new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 0.01f), "color", "static", chair);
+	chair->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 0.01f), "color");
 
 	CActor* floor = world->SpawnActor<CActor>(std::string("floor"),nullptr, Vector(0), Vector(0));
-	Components::CStaticMeshComponent* comp2 = new Components::CStaticMeshComponent(new Material::Material({}), ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 0.01f), "color", "static", floor);
+	floor->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 0.01f), "color");
 	
 	return world;
 }

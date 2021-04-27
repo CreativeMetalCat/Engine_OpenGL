@@ -2,18 +2,6 @@
 #include "RenderComponent.h"
 #include "World.h"
 
-template<class Class, class ...Args>
-inline Class* Engine::CActor::AddComponent(String name, Args ...args)
-{
-	
-	Class* comp = new Class(name, args);
-	if (comp)
-	{
-		components.push_back(comp);
-		return comp;
-	}
-	return NULL;
-}
 
 Vector Engine::CActor::GetForwardVector() const
 {

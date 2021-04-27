@@ -51,9 +51,7 @@ namespace Engine::Components
     public:
         Shader GetShader()const;
 
-        CStaticMeshComponent(Material::Material* material,LoadedMeshData mesh,String shaderName,String name, CActor* owner, Vector Location, Vector Rotation, Vector Scale);
-
-        CStaticMeshComponent(Material::Material* material, LoadedMeshData mesh, String shaderName, String name, CActor* owner);
+        CStaticMeshComponent(String name, CActor* owner,Material::Material* material,LoadedMeshData mesh,String shaderName, Vector Location = Vector(1), Vector Rotation = Vector(1), Vector Scale = Vector(1));
 
         // Inherited via CRenderComponent
         virtual void EndDraw() override;
