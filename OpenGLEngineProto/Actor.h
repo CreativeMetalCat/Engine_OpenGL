@@ -43,10 +43,15 @@ namespace Engine
 
 		Vector GetWorldRotation()const;
 
+		/*Returns component with the same name or null if such component was not found*/
+		template<class Class> Class* GetComponent(String name);
+
 		CActor(String name, CWorld* world, CActor* owner = nullptr, Vector Location = Vector(0), Vector Rotation = Vector(0));
 
-		//Creates and saves a component
-		template<class Class, class ... Args> Class* AddComponent(String name, Args...args);
+		/*Creates new components and adds to actor's storage
+		* NAME MUST BE UNIQUE
+		*/
+		template<class Class, class ... Args> Class* AddComponent(String name, Args ... args);
 
 		// Inherited via CObject
 		virtual void Init() override;
@@ -59,15 +64,27 @@ namespace Engine
 	};
 	
 	template<class Class, class ...Args>
-	inline Class* CActor::AddComponent(String name, Args ...args)
+	inline Class* CActor::AddComponent(String name, Args ... args)
 	{
-		Class* comp = new Class(name,this, args...);
-		if (comp)
+		//do a check, because name must be unique
+		if (std::find_if(components.begin(), components.end(), [name](CComponent* comp) {return comp->Name == name; }) == components.end())
 		{
-			components.push_back(comp);
-			return comp;
+			//create class 
+			Class* comp = new Class(name, this, args...);
+			if (comp)
+			{
+				components.push_back(comp);
+				return comp;
+			}
 		}
 		return NULL;
+	}
+
+
+	template<class Class> inline Class* Engine::CActor::GetComponent(String name)
+	{
+		if (components.empty()) { return nullptr; }
+		return static_cast<Class*>(*std::find_if(components.begin(), components.end(), [name](CComponent* comp) {return comp->Name == name; }));
 	}
 
 }

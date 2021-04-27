@@ -12,14 +12,9 @@ namespace Engine
 	{
 	protected:
 		Array<CActor*> actors = Array<CActor*>();
-
-
-		RenderData currentRenderData;
 	public:
 		/*The game itself*/
 		CGame* game;
-
-		RenderData GetCurrentRenderData()const { return currentRenderData; }
 
 		Array<CActor*> GetActorsOfClass(String className);
 

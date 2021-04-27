@@ -2,9 +2,29 @@
 
 #include "ShaderLoader.hpp"
 #include <algorithm>
+#include "CameraComponent.h"
 
+bool  Engine::CGame::SetCurrentCamera(Engine::Components::Camera::CCameraComponent* camera)
+{
+	if (camera && camera->Valid())
+	{
+		currentCamera = camera;
+		return true;
+	}
+	return false;
+}
 
-
+RenderData Engine::CGame::GetCurrentRenderData()const
+{
+	if (currentCamera)
+	{
+		return currentRenderData;
+	}
+	else
+	{
+		return RenderData();
+	}
+}
 
 Shader* Engine::CGame::GetShader(String name) const
 {
@@ -99,9 +119,15 @@ void Engine::CGame::Run()
 			double currentTime = glfwGetTime();
 			float deltaTime = float(currentTime - lastTime);
 
+			
 			for (int i = 0; i < worlds.size(); i++)
 			{
 				worlds[i]->Update(deltaTime);
+			}
+			//we update after worlds to account for updates of location, rotation, etc.
+			if (currentCamera)
+			{
+				currentRenderData = { currentCamera->GetPerspective(), currentCamera->GetViewMatrix(), {} };
 			}
 		}
 		else

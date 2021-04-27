@@ -26,6 +26,7 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 	
 	CActor* player = world->SpawnActor<CActor>(String("Player"), nullptr, Vector(0), Vector(0));
 	player->AddComponent<CCameraComponent>("camera", 60.f);
+	game->SetCurrentCamera(player->GetComponent<CCameraComponent>("camera"));
 
 	return world;
 }

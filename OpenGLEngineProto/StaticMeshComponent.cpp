@@ -90,7 +90,7 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 
 void Engine::Components::CStaticMeshComponent::BeingDraw()
 {
-	RenderData data = Owner->GetWorld()->GetCurrentRenderData();
+	RenderData data = Owner->GetWorld()->game->GetCurrentRenderData();
 
 	glUseProgram(shaderProgramId);
 
