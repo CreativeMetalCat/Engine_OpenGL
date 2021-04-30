@@ -236,5 +236,8 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Controls</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

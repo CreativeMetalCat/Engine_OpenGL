@@ -7,6 +7,49 @@
 #include "CameraComponent.h"
 #include "ModelLoader.h"
 
+class Player :public Engine::CActor
+{
+	GENERATED_CLASS_BODY(Player,Actor,Player,Engine)
+public:
+	Player(String name, Engine::CWorld* world, CActor* owner = nullptr, Vector Location = Vector(0), Vector Rotation = Vector(0))
+		:CActor(name,world,owner,Location,Rotation)
+	{
+
+	}
+
+	float MovementSpeed = 1.f;
+
+	float MouseSpeed = 0.0005f;
+
+	void Update(float deltaTime)override
+	{
+
+		Rotation.x += MouseSpeed * deltaTime * float(world->game->GetWindowSize().x / 2 - world->game->GetMousePosition().x);
+		Rotation.y += MouseSpeed * deltaTime * float(world->game->GetWindowSize().y / 2 - world->game->GetMousePosition().y);
+
+		world->game->SetMousePosition(Vector2(world->game->GetWindowSize().x / 2, world->game->GetWindowSize().y / 2));
+
+		//printf("%f %f %f \n", Location.x, Location.y, Location.z);
+		if (world->game->GetKeyState(GLFW_KEY_UP))
+		{
+			Location += GetForwardVector() * deltaTime * MovementSpeed;
+		}
+		if (world->game->GetKeyState(GLFW_KEY_DOWN))
+		{
+			Location -= GetForwardVector() * deltaTime * MovementSpeed;
+		}
+		if (world->game->GetKeyState(GLFW_KEY_RIGHT))
+		{
+			Location += GetRightVector() * deltaTime * MovementSpeed;
+		}
+		if (world->game->GetKeyState(GLFW_KEY_LEFT))
+		{
+			Location -= GetRightVector() * deltaTime * MovementSpeed;
+		}
+	}
+
+};
+
 /*Generates a small world with some props*/
 Engine::CWorld* create_debug_world(Engine::CGame* game)
 {
@@ -19,12 +62,12 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 
 
 	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(1), Vector(0));
-	chair->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 0.01f), "color");
+	chair->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 1), "color");
 
 	CActor* floor = world->SpawnActor<CActor>(std::string("floor"),nullptr, Vector(0), Vector(0));
-	floor->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 0.01f), "color");
+	floor->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 1), "color");
 	
-	CActor* player = world->SpawnActor<CActor>(String("Player"), nullptr, Vector(0), Vector(0));
+	Player* player = world->SpawnActor<Player>(String("Player"), nullptr, Vector(0), Vector(0));
 	player->AddComponent<CCameraComponent>("camera", 60.f);
 	game->SetCurrentCamera(player->GetComponent<CCameraComponent>("camera"));
 

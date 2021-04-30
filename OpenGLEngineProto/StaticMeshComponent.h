@@ -13,7 +13,7 @@ namespace Engine::Components
     private:
             void construct(Material::Material* material, String shaderName);
 
-            glm::mat4 getModelMatrix()const;
+            Matrix getModelMatrix()const;
     protected:
 #pragma region ShaderData
         /*These are constant and set when shader is loaded, used to simplfy setting this kind of data*/

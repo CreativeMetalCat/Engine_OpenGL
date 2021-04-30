@@ -3,7 +3,7 @@
 #include "Material.h"
 #include "World.h"
 #include "ControlTypes.h"
-#include <GLFW/glfw3.h>
+#include "Key.h"
 
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -40,6 +40,7 @@ namespace Engine
 		/*Current camera(the one that is used to get render data*/
 		Engine::Components::Camera::CCameraComponent* currentCamera;
  	public:
+		Key::KeyState GetKeyState(int key);
 
 		/*Sets new current camera, that will be used for world
 		* Currently always returns true(unless camera is not valid), as there are no way to fail
@@ -53,7 +54,14 @@ namespace Engine
 		* note: if shader is not present in this world -> shader will be loaded
 		* note2: value is returned as pointer to simplify giving information about shader not existing
 		*/
-		Shader* GetShader(String name)const;
+		Shader* GetShader(String name);
+
+		/*Gets current position of the mouse on the screen*/
+		Vector2 GetMousePosition()const;
+
+		void SetMousePosition(Vector2);
+
+		Vector2 GetWindowSize()const;
 
 		/*Adds world to current world pool
 		* IF world is already in the pool returns false

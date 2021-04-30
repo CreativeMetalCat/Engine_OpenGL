@@ -4,6 +4,11 @@
 #include <algorithm>
 #include "CameraComponent.h"
 
+Engine::Key::KeyState Engine::CGame::GetKeyState(int key)
+{
+	return (Key::KeyState)glfwGetKey(window,key);
+}
+
 bool  Engine::CGame::SetCurrentCamera(Engine::Components::Camera::CCameraComponent* camera)
 {
 	if (camera && camera->Valid())
@@ -26,7 +31,7 @@ RenderData Engine::CGame::GetCurrentRenderData()const
 	}
 }
 
-Shader* Engine::CGame::GetShader(String name) const
+Shader* Engine::CGame::GetShader(String name) 
 {
     if (!shaders.empty())
     {
@@ -39,10 +44,32 @@ Shader* Engine::CGame::GetShader(String name) const
     uint id = Helpers::LoadShaders(std::string("Shaders/" + name + "Vertex.glsl").c_str(), std::string("Shaders/" + name + "Fragment.glsl").c_str());
     if (id != 0)
     {
+		//shaders.push_back(Shader(id, name));
         return new Shader(id, name);
     }
 
     return nullptr;
+}
+
+Vector2 Engine::CGame::GetMousePosition() const
+{	
+	//Mouse coords relative to the screen
+	GLdouble xPos, yPos;
+	glfwGetCursorPos(window, &xPos, &yPos);
+	return Vector2(xPos, yPos);
+}
+
+void Engine::CGame::SetMousePosition(Vector2 pos)
+{
+	glfwSetCursorPos(window, pos.x, pos.y);
+}
+
+Vector2 Engine::CGame::GetWindowSize() const
+{
+	GLint width, height;
+	glfwGetWindowSize(window, &width, &height);
+
+	return Vector2(width, height);
 }
 
 Engine::Material::Material* Engine::CGame::GetMaterial(String name) const

@@ -49,22 +49,27 @@ void Engine::Components::CStaticMeshComponent::construct(Material::Material* mat
 	{
 		printf("Error:Mesh has no uv data! Object: %s", Name.c_str());
 	}
+	
 
-	modelViewPerspectiveMatrixId = glGetUniformLocation(shaderProgramId, "mvp");
-	modelMatrixId = glGetUniformLocation(shaderProgramId, "model");
-	viewMatrixId = glGetUniformLocation(shaderProgramId, "view");
+	modelViewPerspectiveMatrixId = glGetUniformLocation(shader.ProgramId, "mvp");
+	if (modelViewPerspectiveMatrixId == (uint)(Index_None))
+	{
+		printf("Shader Warning: Failed to find uniform location for MVP. Shader: %s. Component: %s \n", shader.Name.c_str(), Name.c_str());
+	}
+	modelMatrixId = glGetUniformLocation(shader.ProgramId, "model");
+	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
 }
 
 glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
 {
 	glm::mat4 model = glm::mat4(1);
+	
 	model = glm::scale(model, Scale);
 
 	model = glm::rotate(model, glm::radians((float)Rotation.x), glm::vec3(1, 0, 0));
 	model = glm::rotate(model, glm::radians((float)Rotation.y), glm::vec3(0, 1, 0));
 	model = glm::rotate(model, glm::radians((float)Rotation.z), glm::vec3(0, 0, 1));
 	model = glm::translate(model, Location);
-
 
 	return model;
 }
@@ -98,7 +103,7 @@ void Engine::Components::CStaticMeshComponent::BeingDraw()
 	glUniformMatrix4fv(viewMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraView));
 	glUniformMatrix4fv(modelMatrixId, 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
 
-	if (material)
+	if (material && material != new Material::Material({}))
 	{
 		material->Apply(shader.ProgramId);
 	}
