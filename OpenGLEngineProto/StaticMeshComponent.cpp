@@ -10,6 +10,12 @@
 
 void Engine::Components::CStaticMeshComponent::construct(String materialName,String shaderName)
 {
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
+
+	glGenVertexArrays(1, &UVArrayID);
+	glBindVertexArray(UVArrayID);
+	
 	if (Owner)
 	{
 		if (Shader* sh = Owner->GetWorld()->game->GetShader(shaderName))
@@ -24,6 +30,18 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		glGenBuffers(1, &vertexBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.Data.Verticies.size(), &mesh.Data.Verticies[0], GL_STATIC_DRAW);
+
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(
+			0,                  // attribute  must match the layout in the shader.
+			3,                  // size: x+y+z=3
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
+		glBindVertexArray(0);
 	}
 	else
 	{
@@ -35,6 +53,18 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		glGenBuffers(1, &normalsBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, normalsBuffer);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.Data.Normals.size(), &mesh.Data.Normals[0], GL_STATIC_DRAW);
+
+		// 2nd attribute buffer : Normals
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(
+			2,                                // attribute.  must match the layout in the shader.
+			3,                                // size : x+y+z=3
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
+		glBindVertexArray(2);
 	}
 	else
 	{
@@ -46,6 +76,18 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		glGenBuffers(1, &uvBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.Data.UVs.size(), &mesh.Data.UVs[0], GL_STATIC_DRAW);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(
+			1,                                // attribute. must match the layout in the shader.
+			2,                                // size : U+V => 2
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
+		glBindVertexArray(1);
 	}
 	else
 	{
@@ -62,54 +104,6 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
 	shader_AmbientLightColorId = glGetUniformLocation(shader.ProgramId, "ambient_light_color");
 	
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
-	glEnableVertexAttribArray(0);
-	//glBindVertexArray(vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-	glVertexAttribPointer(
-		0,                  // attribute  must match the layout in the shader.
-		3,                  // size: x+y+z=3
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
-	glBindVertexArray(0);
-
-	if (!mesh.Data.UVs.empty())
-	{
-		// 2nd attribute buffer : UVs
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-		glVertexAttribPointer(
-			1,                                // attribute. must match the layout in the shader.
-			2,                                // size : U+V => 2
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-		);
-		glBindVertexArray(1);
-	}
-
-	if (!mesh.Data.Normals.empty())
-	{
-		// 2nd attribute buffer : Normals
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalsBuffer);
-		glVertexAttribPointer(
-			2,                                // attribute.  must match the layout in the shader.
-			3,                                // size : x+y+z=3
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-		);
-		glBindVertexArray(2);
-	}
 }
 
 glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
@@ -140,6 +134,7 @@ Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String name, CAct
 void Engine::Components::CStaticMeshComponent::EndDraw()
 {
 	glBindVertexArray(VertexArrayID);
+	glBindVertexArray(UVArrayID);
 	glDrawArrays(GL_TRIANGLES, 0, mesh.Data.Verticies.size());
 	glBindVertexArray(0);
 

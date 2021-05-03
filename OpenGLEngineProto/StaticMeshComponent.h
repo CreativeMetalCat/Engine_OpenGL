@@ -44,6 +44,8 @@ namespace Engine::Components
 
         uint VertexArrayID;
 
+        uint UVArrayID;
+
         LoadedMeshData mesh;
 
         Shader shader;

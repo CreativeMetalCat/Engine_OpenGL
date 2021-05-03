@@ -29,7 +29,7 @@ static const char* fallback =
 
 uint Engine::Material::Material::get_gl_texture_const(int id)
 {
-	return 0x84C0 + (id >= 0 && id < 32) ? id : 0;
+	return (id >= 0 && id < 0x20) ? id : 0;
 }
 
 void Engine::Material::Material::load_null()
@@ -63,11 +63,12 @@ void Engine::Material::Material::Apply(uint ShaderProgramID)
 	{
 		for (int i = 0; i < textureData.size(); i++)
 		{
+			
 			// Bind our texture in Texture Unit i
-			glActiveTexture(get_gl_texture_const(i));
+			glActiveTexture(GL_TEXTURE0 + get_gl_texture_const(i));
 			glBindTexture(GL_TEXTURE_2D, textureData[i].second);
 			// Set our sampler to use Texture Unit i
-			glUniform1i(glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()), i);
+			glUniform1i(glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()), 0);
 		}
 	}
 }
@@ -150,8 +151,8 @@ Engine::Material::Material::Material(String assetFilePath)
 			unsigned char* image = stbi_load(("Textures/" + it.value().get<std::string>()).c_str(), &height, &width, &comp, STBI_rgb_alpha);
 			if (image == nullptr)
 			{
-				height = 16;
-				width = 16;
+				height = 32;
+				width = 32;
 				useFallBack = true;
 				printf("Error! Failed to load texture Name: %s\n", it.value().get<std::string>().c_str());
 			}
