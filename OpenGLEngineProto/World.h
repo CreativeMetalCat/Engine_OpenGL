@@ -13,6 +13,14 @@ namespace Engine
 	protected:
 		Array<CActor*> actors = Array<CActor*>();
 	public:
+#pragma region AmbientLight
+		float AmbientLightIntensity = 1.f;
+
+		Color AmbientLightColor = Color(0);
+
+		bool AmbientLightEnabled = true;
+#pragma endregion
+
 		/*The game itself*/
 		CGame* game;
 

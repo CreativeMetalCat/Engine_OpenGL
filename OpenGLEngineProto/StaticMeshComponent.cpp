@@ -58,7 +58,7 @@ void Engine::Components::CStaticMeshComponent::construct(Material::Material* mat
 	}
 	modelMatrixId = glGetUniformLocation(shader.ProgramId, "model");
 	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
-
+	shader_AmbientLightColorId = glGetUniformLocation(shader.ProgramId, "ambient_light_color");
 	
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
@@ -161,7 +161,7 @@ void Engine::Components::CStaticMeshComponent::BeingDraw()
 	glUniformMatrix4fv(viewMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraView));
 	glUniformMatrix4fv(modelMatrixId, 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
 
-	glUniform1f(shader_ambientLightIntensityId, ambient_light_intensity);
+	glUniform3f(shader_AmbientLightColorId, data.AmbientLightColor.r, data.AmbientLightColor.b, data.AmbientLightColor.g);
 
 	if (material && material != new Material::Material({}))
 	{

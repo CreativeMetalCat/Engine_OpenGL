@@ -146,16 +146,21 @@ void Engine::CGame::Run()
 			double currentTime = glfwGetTime();
 			float deltaTime = float(currentTime - lastTime);
 
-			
+			Color totalAmbientLight = Color(0);
+
 			for (int i = 0; i < worlds.size(); i++)
 			{
 				worlds[i]->Update(deltaTime);
+				//calculate current ambient light by adding light from all worlds
+				totalAmbientLight += worlds[i]->AmbientLightColor * worlds[i]->AmbientLightIntensity * (float)worlds[i]->AmbientLightEnabled;
 			}
 			//we update after worlds to account for updates of location, rotation, etc.
 			if (currentCamera)
 			{
-				currentRenderData = { currentCamera->GetPerspective(), currentCamera->GetViewMatrix(), {} };
+				currentRenderData.CameraPerspective = currentCamera->GetPerspective();
+				currentRenderData.CameraView = currentCamera->GetViewMatrix();
 			}
+			currentRenderData.AmbientLightColor = totalAmbientLight;
 		}
 		else
 		{

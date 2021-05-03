@@ -18,9 +18,8 @@ namespace Engine::Components
 #pragma region ShaderData
         /*These are constant and set when shader is loaded, used to simplfy setting this kind of data*/
 
-        uint shader_ambientLightIntensityId;
-        uint shader_ambientLightReflectivityId;
-        uint shader_ambientLightColorId;
+        /*Id for world's color*/
+        uint shader_AmbientLightColorId;
 
         /*Buffer for mesh's verticies*/
         uint vertexBuffer;

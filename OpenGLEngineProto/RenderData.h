@@ -17,7 +17,6 @@ public:
 
 	Array<LightData> Lights = Array<LightData>();
 
-	float AmbientLightIntensity = 1.f;
-
+	//Color calculated from all worlds(intensity included)
 	Color AmbientLightColor = Color(0);
 };

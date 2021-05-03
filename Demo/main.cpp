@@ -58,8 +58,9 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 	using CCameraComponent = Components::Camera::CCameraComponent;
 
 	Engine::CWorld* world = new Engine::CWorld();
-	world->game = game;
-
+	world->AmbientLightColor = Color(1, 0, 0);
+	world->AmbientLightIntensity = 0.5;
+	game->AddWorld(world);
 
 	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(1), Vector(0));
 	chair->AddComponent<Components::CStaticMeshComponent>("static",new Material::Material({}), ModelLoader::LoadModel("models/SM_Chair.FBX", 1), "texture");
