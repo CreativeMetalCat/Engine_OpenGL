@@ -8,7 +8,7 @@
     "pixelated_filter":true,
     "textures":
     {
-        "main":"Basic/T_Brick_Clay_Beveled_D.TGA",
-        "normal":"Basic/T_Brick_Clay_Beveled_N.TGA"
+        "texture_main":"Basic/T_Brick_Clay_Beveled_D.TGA",
+        "texture_normal":"Basic/T_Brick_Clay_Beveled_N.TGA"
     }
 }

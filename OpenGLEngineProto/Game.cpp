@@ -85,7 +85,7 @@ Engine::Material::Material* Engine::CGame::GetMaterial(String name)
 	}
 
 	//we don't have this asset loaded yet -> try to load it and it doesn't matter if loading found the result, because material has fallback methods
-	Material::Material* mat = new Material::Material(name);
+	Material::Material* mat = new Material::Material("Materials/"+name);
 	materials.push_back(*mat);
 
 	return mat;

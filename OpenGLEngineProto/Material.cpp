@@ -67,7 +67,7 @@ void Engine::Material::Material::Apply(uint ShaderProgramID)
 			glActiveTexture(get_gl_texture_const(i));
 			glBindTexture(GL_TEXTURE_2D, textureData[i].second);
 			// Set our sampler to use Texture Unit i
-			glUniform1i(glGetUniformLocation(ShaderProgramID,textureData[i].first.c_str()), i);
+			glUniform1i(glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()), i);
 		}
 	}
 }

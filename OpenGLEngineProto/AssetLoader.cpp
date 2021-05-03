@@ -5,11 +5,11 @@
 #include <algorithm>
 #include <sstream>
 
-json Helpers::LoadAssetFile(String filename)
+nlohmann::json Helpers::LoadAssetFile(String filename)
 {
 	// Read the Fragment Shader code from the file
 	std::string assetText;
-	std::ifstream assetStream(filename, std::ios::in);
+	std::ifstream assetStream(filename + ".asset", std::ios::in);
 	if (assetStream.is_open())
 	{
 		std::stringstream sstr;
@@ -18,5 +18,9 @@ json Helpers::LoadAssetFile(String filename)
 		assetStream.close();
 	}
 
-	return json::parse(assetText);
+	if (assetText == "")
+	{
+		return nlohmann::json::parse("{asset_info:{\"type\":\"none\"}}");
+	}
+	return nlohmann::json::parse(assetText);
 }
