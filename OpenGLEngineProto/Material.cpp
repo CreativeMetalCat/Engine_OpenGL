@@ -146,13 +146,14 @@ Engine::Material::Material::Material(String assetFilePath)
 			std::pair<String, uint>texure;
 			texure.first = it.key();
 
-			unsigned char* image = stbi_load(it.value().get<std::string>().c_str(), &height, &width, &comp, STBI_rgb_alpha);
+			//All textures are stored in "Textures" folder
+			unsigned char* image = stbi_load(("Textures/" + it.value().get<std::string>()).c_str(), &height, &width, &comp, STBI_rgb_alpha);
 			if (image == nullptr)
 			{
 				height = 16;
 				width = 16;
 				useFallBack = true;
-				printf("Failed to load a texure. %s", it.value().get<std::string>().c_str());
+				printf("Error! Failed to load texture Name: %s\n", it.value().get<std::string>().c_str());
 			}
 
 			glGenTextures(1, &texure.second);

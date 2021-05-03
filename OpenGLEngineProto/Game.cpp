@@ -142,7 +142,7 @@ bool Engine::CGame::CreateWindow(std::string name, int height, int width)
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Hide the mouse and enable unlimited mouvement
-	glfwSetInputMode(window, GLFW_CURSOR, MouseMode::Normal);
+	glfwSetInputMode(window, GLFW_CURSOR, MouseMode::Hidden);
 }
 
 void Engine::CGame::Run()

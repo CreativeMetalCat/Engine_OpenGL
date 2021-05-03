@@ -18,6 +18,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		}
 		material = Owner->GetWorld()->game->GetMaterial(materialName);
 	}
+
 	if (!mesh.Data.Verticies.empty())
 	{
 		glGenBuffers(1, &vertexBuffer);
@@ -115,7 +116,7 @@ glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
 {
 	glm::mat4 model = glm::mat4(1);
 	
-	model = glm::scale(model, Scale);
+	model = glm::scale(model, Scale * mesh.Scale);
 
 	model = glm::rotate(model, glm::radians((float)Rotation.x), glm::vec3(1, 0, 0));
 	model = glm::rotate(model, glm::radians((float)Rotation.y), glm::vec3(0, 1, 0));
