@@ -27,8 +27,8 @@ namespace Engine::Material
 
 		Material();
 
-		/*Map<String, String>texures ->
-		> first string is what kind of texure this is (diffuse,normal,etc.) <- this name is what name will be used when passing to shaders
+		/*Map<String, String>textures ->
+		> first string is what kind of texture this is (diffuse,normal,etc.) <- this name is what name will be used when passing to shaders
 		> Second string is texture path 
 		*/
 		Material(Map<String, String>textures);

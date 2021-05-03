@@ -47,7 +47,7 @@ CRenderObject::CRenderObject(MeshData mesh,std::string textureName, std::string 
 	if (image == nullptr)
 	{
 		//fallback to using null checkboard(not yet implemented)
-		printf("Failed to load a texure. %s", TextureName.c_str());
+		printf("Failed to load a texture. %s", TextureName.c_str());
 	}
 
 	glGenTextures(1, &texture);

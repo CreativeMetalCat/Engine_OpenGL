@@ -35,11 +35,11 @@ uint Engine::Material::Material::get_gl_texture_const(int id)
 void Engine::Material::Material::load_null()
 {
 	//we have nothing to load from, but for the sake of making it easier to tell if something is broken we will display "null" texture
-	std::pair<String, uint>texure;
-	texure.first = "null";
+	std::pair<String, uint>texture;
+	texture.first = "null";
 
-	glGenTextures(1, &texure.second);
-	glBindTexture(GL_TEXTURE_2D, texure.second);
+	glGenTextures(1, &texture.second);
+	glBindTexture(GL_TEXTURE_2D, texture.second);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, reinterpret_cast<const Image>(const_cast<char*>(fallback)));
 
 	/*Currently all of the textures are loaded with GL_NEAREST, which gives textures that nice pixelated look*/
@@ -49,7 +49,7 @@ void Engine::Material::Material::load_null()
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	textureData.push_back(texure);
+	textureData.push_back(texture);
 }
 
 uint Engine::Material::Material::GetTexture(String)
@@ -91,8 +91,8 @@ Engine::Material::Material::Material(Map<String, String> textures)
 		for (int i = 0; i < textures.size(); i++)
 		{
 			bool useFallBack = false;
-			std::pair<String, uint>texure;
-			texure.first = textures[i].first;
+			std::pair<String, uint>texture;
+			texture.first = textures[i].first;
 
 			unsigned char* image = stbi_load(textures[i].second.c_str(), &height, &width, &comp, STBI_rgb_alpha);
 			if (image == nullptr)
@@ -100,11 +100,11 @@ Engine::Material::Material::Material(Map<String, String> textures)
 				height = 16;
 				width = 16;
 				useFallBack = true;
-				printf("Failed to load a texure. %s", textures[i].second.c_str());
+				printf("Failed to load a texture. %s", textures[i].second.c_str());
 			}
 
-			glGenTextures(1, &texure.second);
-			glBindTexture(GL_TEXTURE_2D, texure.second);
+			glGenTextures(1, &texture.second);
+			glBindTexture(GL_TEXTURE_2D, texture.second);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, useFallBack ? nullImage : image);
 
 			/*Currently all of the textures are loaded with GL_NEAREST, which gives textures that nice pixelated look*/
@@ -117,7 +117,7 @@ Engine::Material::Material::Material(Map<String, String> textures)
 			//remove the image -> we don't need it anymore
 			delete[] image;
 
-			textureData.push_back(texure);
+			textureData.push_back(texture);
 		}
 	}
 }
@@ -143,8 +143,8 @@ Engine::Material::Material::Material(String assetFilePath)
 			if (!it.value().is_string()) { continue; }
 
 			bool useFallBack = false;
-			std::pair<String, uint>texure;
-			texure.first = it.key();
+			std::pair<String, uint>texture;
+			texture.first = it.key();
 
 			//All textures are stored in "Textures" folder
 			unsigned char* image = stbi_load(("Textures/" + it.value().get<std::string>()).c_str(), &height, &width, &comp, STBI_rgb_alpha);
@@ -156,8 +156,8 @@ Engine::Material::Material::Material(String assetFilePath)
 				printf("Error! Failed to load texture Name: %s\n", it.value().get<std::string>().c_str());
 			}
 
-			glGenTextures(1, &texure.second);
-			glBindTexture(GL_TEXTURE_2D, texure.second);
+			glGenTextures(1, &texture.second);
+			glBindTexture(GL_TEXTURE_2D, texture.second);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, useFallBack ? nullImage : image);
 
 			
@@ -169,7 +169,7 @@ Engine::Material::Material::Material(String assetFilePath)
 			//remove the image -> we don't need it anymore
 			delete[] image;
 
-			textureData.push_back(texure);
+			textureData.push_back(texture);
 		}
 	}
 	else
