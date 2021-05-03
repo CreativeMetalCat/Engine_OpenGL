@@ -43,6 +43,8 @@ namespace Engine::Components
         GLuint viewMatrixId;
 #pragma endregion
 
+        uint VertexArrayID;
+
         LoadedMeshData mesh;
 
         Shader shader;

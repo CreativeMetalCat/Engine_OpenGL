@@ -11,9 +11,13 @@
 struct RenderData
 {
 public:
-	glm::mat4 CameraPerspective;
+	Matrix CameraPerspective;
 
-	glm::mat4 CameraView;
+	Matrix CameraView;
 
 	Array<LightData> Lights = Array<LightData>();
+
+	float AmbientLightIntensity = 1.f;
+
+	Color AmbientLightColor = Color(0);
 };
