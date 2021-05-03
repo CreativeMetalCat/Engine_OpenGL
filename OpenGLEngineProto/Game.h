@@ -29,7 +29,7 @@ namespace Engine
 		Array<CWorld*>worlds = Array<CWorld*>();
 
 		/*Array of currently loaded shaders. Used to simply access to shaders and avoid loading same shader twice*/
-		Array<Shader> shaders = Array<Shader>();
+		Array<ShaderRawData> shaders = Array<ShaderRawData>();
 
 		/*Array of currently loaded materials. Used simplify access to materils and to avoid loading same textures for same materials more then once*/
 		Array<Material::Material> materials = Array<Material::Material>();

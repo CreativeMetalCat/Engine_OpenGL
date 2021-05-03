@@ -170,6 +170,7 @@
     <ClCompile Include="openFBXLoader\ofbx.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="StaticMeshComponent.cpp" />
     <ClCompile Include="World.cpp" />

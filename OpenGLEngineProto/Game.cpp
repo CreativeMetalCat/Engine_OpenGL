@@ -35,19 +35,20 @@ Shader* Engine::CGame::GetShader(String name)
 {
     if (!shaders.empty())
     {
-        Array<Shader>::const_iterator result = std::find_if(shaders.begin(), shaders.end(), [name](Shader shader) {return shader.Name == name; });
+        Array<ShaderRawData>::const_iterator result = std::find_if(shaders.begin(), shaders.end(), [name](ShaderRawData shader) {return shader.Name == name; });
         if (result != shaders.end())
         {
-            return new Shader(*result);
+			return new Shader((*result).GenerateShader());
         }
     }
-    uint id = Helpers::LoadShaders(std::string("Shaders/" + name + "Vertex.glsl").c_str(), std::string("Shaders/" + name + "Fragment.glsl").c_str());
-    if (id != 0)
-    {
-		//shaders.push_back(Shader(id, name));
-        return new Shader(id, name);
-    }
 
+    //"Shaders/"
+	ShaderRawData data = ShaderRawData(name);
+	if (data.Valid)
+	{
+		shaders.push_back(data);
+		return new Shader((data.GenerateShader()));
+	}
     return nullptr;
 }
 

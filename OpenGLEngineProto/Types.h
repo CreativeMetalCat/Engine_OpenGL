@@ -42,4 +42,12 @@ enum Constants
 	Index_None  = -1
 };
 
+enum ShaderPathMode
+{
+	//shaders will be separated by extension -> shaderName.vs and shaderName.fs
+	Extension,
+	//shaders will be separated by name -> shaderNameVertex.glsl and shaderNameFragment.glsl
+	Name
+};
+
 #define INDEX_NONE Contstants::Index_None

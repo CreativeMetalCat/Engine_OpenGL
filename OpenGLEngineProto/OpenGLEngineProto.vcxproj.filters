@@ -135,6 +135,9 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Source Files\Components\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shapes.hpp">
@@ -235,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Key.h">
-      <Filter>Header Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
