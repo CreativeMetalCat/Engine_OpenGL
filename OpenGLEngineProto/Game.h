@@ -71,7 +71,7 @@ namespace Engine
 		/* Returns material that has this name
 		* note: if no material with this name is currently loaded -> it will be loaded
 		*/
-		Material::Material* GetMaterial(String name)const;
+		Material::Material* GetMaterial(String name);
 
 		/*Creates window and does basic setup*/
 		bool CreateWindow(std::string name, int height = 1028,int width = 768);

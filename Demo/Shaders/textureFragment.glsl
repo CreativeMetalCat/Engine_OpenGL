@@ -36,7 +36,7 @@ in vec3 vertex;
 out vec3 color;
 
 // Values that stay constant for the whole mesh.
-uniform sampler2D textureSampler;
+uniform sampler2D texture_main;
 
 uniform vec3 ambient_light_color;
 
@@ -112,9 +112,9 @@ void main()
 
     //ambient_light_intensity*ambient_light_reflectivity
     // Output color = color of the texture at the specified UV
-    //color = ambient_light_intensity * ambient_light_reflectivity *   texture( textureSampler, UV ).rgb +   texture( textureSampler, UV ).rgb * diffuse_intensity*diffuse_reflectivity*cosTheta / (distance*distance);
-    vec3 mat_color =  texture( textureSampler, UV ).rgb;
-    vec3 temp = ambient_light_color;//ambient_light_intensity * ambient_light_reflectivity *   mat_color;
+    //color = ambient_light_intensity * ambient_light_reflectivity *   texture( texture_main, UV ).rgb +   texture( texture_main, UV ).rgb * diffuse_intensity*diffuse_reflectivity*cosTheta / (distance*distance);
+    vec3 mat_color =  texture( texture_main, UV ).rgb;
+    vec3 temp = mat_color;//ambient_light_intensity * ambient_light_reflectivity *   mat_color;
     for(int i = 0 ;i < MAX_LIGHTS;i++)
     {
        temp +=  calculatePointLight(pointLights[i],mat_color,n,E);

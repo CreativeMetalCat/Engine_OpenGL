@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AssetLoader.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraPlayer.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -177,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AssetLoader.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraPlayer.hpp" />
     <ClInclude Include="Component.h" />

@@ -25,3 +25,9 @@ Shader ShaderRawData::GenerateShader() const
 {
 	return { Helpers::LoadShaders(VertexShaderText, FragmentShaderText),Name };
 }
+
+ShaderRawData::~ShaderRawData()
+{
+	VertexShaderText.~basic_string();
+	FragmentShaderText.~basic_string();
+}

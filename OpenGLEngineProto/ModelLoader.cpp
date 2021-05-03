@@ -181,7 +181,7 @@ std::vector<LoadedMeshData> ModelLoader::LoadModelFromScene_openFBX(std::string 
             //1) FBX scene loading is a placeholder before actual scene loading will be implemented(that will have it's own model and texture info)
             //2) there is no support for multi texture meshes yet
             data.MaterialNames.push_back(scene->getMesh(i)->getMaterial(0)->name);
-            //how to get texure used
+            //how to get texture used
             //scene->getMesh(0)->getMaterial(0)->getTexture(ofbx::Texture::DIFFUSE)->getFileName();
             result.push_back(data);
             //printf(scene->getMesh(i)->getMaterial(0)->name);
