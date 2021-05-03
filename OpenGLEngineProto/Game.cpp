@@ -73,9 +73,22 @@ Vector2 Engine::CGame::GetWindowSize() const
 	return Vector2(width, height);
 }
 
-Engine::Material::Material* Engine::CGame::GetMaterial(String name) const
+Engine::Material::Material* Engine::CGame::GetMaterial(String name)
 {
-    return nullptr;
+	if (!materials.empty())
+	{
+		Array<Material::Material>::const_iterator iter = std::find_if(materials.begin(), materials.end(), [name](Material::Material mat) {return mat.Name == name; });
+		if (iter != materials.end())
+		{
+			return new Material::Material(*iter);
+		}
+	}
+
+	//we don't have this asset loaded yet -> try to load it and it doesn't matter if loading found the result, because material has fallback methods
+	Material::Material* mat = new Material::Material(name);
+	materials.push_back(*mat);
+
+	return mat;
 }
 
 bool Engine::CGame::CreateWindow(std::string name, int height, int width)
@@ -209,6 +222,7 @@ Engine::CGame::~CGame()
 	{
 		delete worlds[i];
 	}
+
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

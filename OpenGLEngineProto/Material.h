@@ -11,10 +11,13 @@ namespace Engine::Material
 	{
 	private:
 		uint get_gl_texture_const(int id);
+
+		void load_null();
 	protected:
 		//Array of pairs with key being location that texture will be binded to and value being the texture itself
 		Map<String, uint> textureData;
 	public:
+		String Name;
 
 		uint GetTexture(String);
 
@@ -22,11 +25,15 @@ namespace Engine::Material
 
 		void Apply(uint ShaderProgramID);
 
+		Material();
+
 		/*Map<String, String>texures ->
 		> first string is what kind of texure this is (diffuse,normal,etc.) <- this name is what name will be used when passing to shaders
 		> Second string is texture path 
 		*/
 		Material(Map<String, String>textures);
+
+		Material(String assetFilePath);
 
 		~Material();
 	};

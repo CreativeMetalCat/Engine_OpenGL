@@ -8,7 +8,7 @@
 
 //class Engine::CActor;
 
-void Engine::Components::CStaticMeshComponent::construct(Material::Material* material,String shaderName)
+void Engine::Components::CStaticMeshComponent::construct(String materialName,String shaderName)
 {
 	if (Owner)
 	{
@@ -16,6 +16,7 @@ void Engine::Components::CStaticMeshComponent::construct(Material::Material* mat
 		{
 			shader = *sh;
 		}
+		material = Owner->GetWorld()->game->GetMaterial(materialName);
 	}
 	if (!mesh.Data.Verticies.empty())
 	{
@@ -129,10 +130,10 @@ Shader Engine::Components::CStaticMeshComponent::GetShader() const
 	return shader;
 }
 
-Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String name, CActor* owner,Material::Material* material, LoadedMeshData _mesh, String shaderName, Vector Location, Vector Rotation, Vector Scale)
+Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String name, CActor* owner,String materialName, LoadedMeshData _mesh, String shaderName, Vector Location, Vector Rotation, Vector Scale)
 	:Components::CRenderComponent(name,owner,Location,Rotation,Scale),mesh(_mesh)
 {
-	construct(material,shaderName);
+	construct(materialName,shaderName);
 }
 
 void Engine::Components::CStaticMeshComponent::EndDraw()

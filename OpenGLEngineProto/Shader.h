@@ -12,6 +12,11 @@ struct Shader
 
 	/*Name of the shader, used for error display*/
 	String Name = "null";
+
+	~Shader()
+	{
+		glDeleteProgram(ProgramId);
+	}
 };
 
 /*Struct that contains raw data(the text of shader)
@@ -38,5 +43,7 @@ public:
 
 public:
 	Shader GenerateShader()const;
+
+	~ShaderRawData();
 };
 

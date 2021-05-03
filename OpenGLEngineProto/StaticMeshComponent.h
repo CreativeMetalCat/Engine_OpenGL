@@ -11,7 +11,7 @@ namespace Engine::Components
     {
         GENERATED_CLASS_BODY(StaticMeshComponent, RenderComponent, RenderComponents, Engine::Components)
     private:
-            void construct(Material::Material* material, String shaderName);
+            void construct(String materialName, String shaderName);
 
             Matrix getModelMatrix()const;
     protected:
@@ -52,7 +52,7 @@ namespace Engine::Components
     public:
         Shader GetShader()const;
 
-        CStaticMeshComponent(String name, CActor* owner,Material::Material* material,LoadedMeshData mesh,String shaderName, Vector Location = Vector(0), Vector Rotation = Vector(0), Vector Scale = Vector(1));
+        CStaticMeshComponent(String name, CActor* owner, String materialName, LoadedMeshData mesh,String shaderName, Vector Location = Vector(0), Vector Rotation = Vector(0), Vector Scale = Vector(1));
 
         // Inherited via CRenderComponent
         virtual void EndDraw() override;

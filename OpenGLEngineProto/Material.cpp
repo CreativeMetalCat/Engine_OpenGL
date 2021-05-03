@@ -3,6 +3,7 @@
 #include <gl/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "AssetLoader.h"
 
 //a checkerboard pattern image exported from GIMP
 static const char* fallback =
@@ -31,6 +32,26 @@ uint Engine::Material::Material::get_gl_texture_const(int id)
 	return 0x84C0 + (id >= 0 && id < 32) ? id : 0;
 }
 
+void Engine::Material::Material::load_null()
+{
+	//we have nothing to load from, but for the sake of making it easier to tell if something is broken we will display "null" texture
+	std::pair<String, uint>texure;
+	texure.first = "null";
+
+	glGenTextures(1, &texure.second);
+	glBindTexture(GL_TEXTURE_2D, texure.second);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, reinterpret_cast<const Image>(const_cast<char*>(fallback)));
+
+	/*Currently all of the textures are loaded with GL_NEAREST, which gives textures that nice pixelated look*/
+	//in the future(when different asset system will be finally implemented this will be loaded from that very file
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	textureData.push_back(texure);
+}
+
 uint Engine::Material::Material::GetTexture(String)
 {
 	return uint();
@@ -49,6 +70,11 @@ void Engine::Material::Material::Apply(uint ShaderProgramID)
 			glUniform1i(glGetUniformLocation(ShaderProgramID,textureData[i].first.c_str()), i);
 		}
 	}
+}
+
+Engine::Material::Material::Material()
+{
+	load_null();
 }
 
 Engine::Material::Material::Material(Map<String, String> textures)
@@ -93,6 +119,61 @@ Engine::Material::Material::Material(Map<String, String> textures)
 
 			textureData.push_back(texure);
 		}
+	}
+}
+
+Engine::Material::Material::Material(String assetFilePath)
+{
+	//here we will load .asset file and load every texture we need
+	//this function's implementation relies on nlohmann's json library but only inside this function
+	using json = nlohmann::json;
+	json data = Helpers::LoadAssetFile(assetFilePath);
+	if (data["asset_info"]["type"] == "material")
+	{
+		Image nullImage = reinterpret_cast<const Image>(const_cast<char*>(fallback));
+
+		int height;//image height
+		int width;//image width
+		int comp;//channels
+
+		int filter = data["pixelated_filter"].get<bool>() ? GL_NEAREST : GL_LINEAR;
+
+		for (auto it = data["textures"].begin(); it != data["textures"].end(); ++it)
+		{
+			if (!it.value().is_string()) { continue; }
+
+			bool useFallBack = false;
+			std::pair<String, uint>texure;
+			texure.first = it.key();
+
+			unsigned char* image = stbi_load(it.value().get<std::string>().c_str(), &height, &width, &comp, STBI_rgb_alpha);
+			if (image == nullptr)
+			{
+				height = 16;
+				width = 16;
+				useFallBack = true;
+				printf("Failed to load a texure. %s", it.value().get<std::string>().c_str());
+			}
+
+			glGenTextures(1, &texure.second);
+			glBindTexture(GL_TEXTURE_2D, texure.second);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, useFallBack ? nullImage : image);
+
+			
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			//remove the image -> we don't need it anymore
+			delete[] image;
+
+			textureData.push_back(texure);
+		}
+	}
+	else
+	{
+		load_null();
 	}
 }
 

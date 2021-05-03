@@ -1,0 +1,14 @@
+{
+    "asset_info":
+    {
+        "asset_format_ver":1,
+        "type":"material"
+    },
+    "name":"test",
+    "pixelated_filter":true,
+    "textures":
+    {
+        "main":"Basic/T_Brick_Clay_Beveled_D.TGA",
+        "normal":"Basic/T_Brick_Clay_Beveled_N.TGA"
+    }
+}
