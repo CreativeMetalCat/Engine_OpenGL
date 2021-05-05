@@ -5,6 +5,8 @@
 
 #include "AssetLoader.h"
 
+#include "Macros.h"
+
 //a checkerboard pattern image exported from GIMP
 static const char* fallback =
 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`Q$Z`Q$Z`Q$Z`Q$Z`Q$Z`Q$Z`Q$Z`Q$Z"
@@ -63,13 +65,14 @@ void Engine::Material::Material::Apply(uint ShaderProgramID)
 	{
 		for (int i = 0; i < textureData.size(); i++)
 		{
-			
 			// Bind our texture in Texture Unit i
 			glActiveTexture(GL_TEXTURE0 + get_gl_texture_const(i));
 			glBindTexture(GL_TEXTURE_2D, textureData[i].second);
 			// Set our sampler to use Texture Unit i
 			glUniform1i(glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()), i);
 		}
+
+		//LOG_ERROR(glewGetErrorString(glGetError()), Engine::Material::Material::Apply, Name.c_str());
 	}
 }
 
@@ -139,6 +142,8 @@ Engine::Material::Material::Material(String assetFilePath)
 
 		int filter = data["pixelated_filter"].get<bool>() ? GL_NEAREST : GL_LINEAR;
 
+		Name = data["name"].get<std::string>();
+
 		for (auto it = data["textures"].begin(); it != data["textures"].end(); ++it)
 		{
 			if (!it.value().is_string()) { continue; }
@@ -171,6 +176,8 @@ Engine::Material::Material::Material(String assetFilePath)
 			delete[] image;
 
 			textureData.push_back(texture);
+
+			LOG_ERROR(glewGetErrorString(glGetError()), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
 		}
 	}
 	else

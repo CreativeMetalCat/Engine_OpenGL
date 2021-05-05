@@ -64,6 +64,9 @@
     <Filter Include="Source Files\Components\Camera">
       <UniqueIdentifier>{73b82ddc-e6f5-4052-bc4d-ac838501f684}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Macros">
+      <UniqueIdentifier>{8ef2558b-a183-467a-9a6b-4433a867df2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="AssetLoader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files\Macros</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

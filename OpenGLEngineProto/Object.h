@@ -4,13 +4,13 @@
 #define USE_DEFAULT_CPP
 
 #include "Types.h"
+#include "Macros.h"
 
 #ifndef GENERATED_CLASS_BODY
 #define GENERATED_CLASS_BODY(name,parentName,category,Namespace)\
 void set_class_data_generated(){classInfo.Name = #name;classInfo.Parent = #parentName;classInfo.Category = #category;}\
 typedef Namespace::##C##parentName Super;
 #endif // !GENERATED_CLASS_BODY
-
 
 
 namespace Engine

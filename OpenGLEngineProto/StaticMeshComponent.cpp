@@ -15,7 +15,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 
 	glGenVertexArrays(1, &UVArrayID);
 	glBindVertexArray(UVArrayID);
-	
+
 	if (Owner)
 	{
 		if (Shader* sh = Owner->GetWorld()->game->GetShader(shaderName))
@@ -71,7 +71,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		printf("Error:Mesh has no normals data! Object: %s", Name.c_str());
 	}
 
-	
+
 
 	if (!mesh.Data.UVs.empty())
 	{
@@ -95,7 +95,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	{
 		printf("Error:Mesh has no uv data! Object: %s", Name.c_str());
 	}
-	
+
 
 	modelViewPerspectiveMatrixId = glGetUniformLocation(shader.ProgramId, "mvp");
 	if (modelViewPerspectiveMatrixId == (uint)(Index_None))
@@ -105,7 +105,6 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	modelMatrixId = glGetUniformLocation(shader.ProgramId, "model");
 	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
 	shader_AmbientLightColorId = glGetUniformLocation(shader.ProgramId, "ambient_light_color");
-	
 }
 
 glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
@@ -139,7 +138,7 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 	glBindVertexArray(UVArrayID);
 
 	glDrawArrays(GL_TRIANGLES, 0, mesh.Data.Verticies.size());
-	
+
 	glBindVertexArray(0);
 
 	if (!mesh.Data.UVs.empty())
@@ -150,15 +149,14 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 	{
 		glBindVertexArray(2);
 	}
-	
 }
 
 void Engine::Components::CStaticMeshComponent::BeginDraw()
 {
-	
-
 	RenderData data = Owner->GetWorld()->game->GetCurrentRenderData();
 
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::BeginDraw, (Name + " Parent: " + Owner->Name).c_str());
+	
 	glUseProgram(shader.ProgramId);
 
 	glUniformMatrix4fv(modelViewPerspectiveMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraPerspective * data.CameraView * getModelMatrix()));
@@ -167,7 +165,7 @@ void Engine::Components::CStaticMeshComponent::BeginDraw()
 
 	glUniform3f(shader_AmbientLightColorId, data.AmbientLightColor.r, data.AmbientLightColor.b, data.AmbientLightColor.g);
 
-	if (material && material != new Material::Material({}))
+	if (material)
 	{
 		material->Apply(shader.ProgramId);
 	}
