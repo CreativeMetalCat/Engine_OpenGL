@@ -58,7 +58,7 @@ namespace Engine::Components
 
         // Inherited via CRenderComponent
         virtual void EndDraw() override;
-        virtual void BeingDraw()override;
+        virtual void BeginDraw()override;
 
         ~CStaticMeshComponent();
     };

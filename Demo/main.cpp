@@ -65,8 +65,8 @@ Engine::CWorld* create_debug_world(Engine::CGame* game)
 	CActor* chair = world->SpawnActor<CActor>(std::string("chair"), nullptr, Vector(1), Vector(0));
 	chair->AddComponent<Components::CStaticMeshComponent>("static","M_Test", ModelLoader::LoadModel("models/SM_Chair.FBX", 0.01f), "texture");
 
-	/*CActor* floor = world->SpawnActor<CActor>(std::string("floor"),nullptr, Vector(0), Vector(0));
-	floor->AddComponent<Components::CStaticMeshComponent>("static","M_Test", ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 0.01f), "texture");*/
+	CActor* floor = world->SpawnActor<CActor>(std::string("floor"),nullptr, Vector(0), Vector(0));
+	floor->AddComponent<Components::CStaticMeshComponent>("static","M_Test", ModelLoader::LoadModel("models/basic/Floor_400x400.FBX", 0.01f), "texture");
 	
 	Player* player = world->SpawnActor<Player>(String("Player"), nullptr, Vector(0), Vector(0));
 	player->AddComponent<CCameraComponent>("camera", 60.f);

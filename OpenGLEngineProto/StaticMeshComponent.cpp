@@ -71,6 +71,8 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		printf("Error:Mesh has no normals data! Object: %s", Name.c_str());
 	}
 
+	
+
 	if (!mesh.Data.UVs.empty())
 	{
 		glGenBuffers(1, &uvBuffer);
@@ -135,7 +137,9 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 {
 	glBindVertexArray(VertexArrayID);
 	glBindVertexArray(UVArrayID);
+
 	glDrawArrays(GL_TRIANGLES, 0, mesh.Data.Verticies.size());
+	
 	glBindVertexArray(0);
 
 	if (!mesh.Data.UVs.empty())
@@ -146,10 +150,13 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 	{
 		glBindVertexArray(2);
 	}
+	
 }
 
-void Engine::Components::CStaticMeshComponent::BeingDraw()
+void Engine::Components::CStaticMeshComponent::BeginDraw()
 {
+	
+
 	RenderData data = Owner->GetWorld()->game->GetCurrentRenderData();
 
 	glUseProgram(shader.ProgramId);

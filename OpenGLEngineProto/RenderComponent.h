@@ -11,7 +11,7 @@ namespace Engine::Components
 	protected:
 		
 	public:
-		virtual void BeingDraw() = 0;
+		virtual void BeginDraw() {}
 
 		virtual void EndDraw() = 0;
 

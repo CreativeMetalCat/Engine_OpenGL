@@ -19,6 +19,7 @@ namespace Engine::Material
 	public:
 		String Name;
 
+		
 		uint GetTexture(String);
 
 		//Map<String, Image> Textures;
@@ -31,6 +32,7 @@ namespace Engine::Material
 		> first string is what kind of texture this is (diffuse,normal,etc.) <- this name is what name will be used when passing to shaders
 		> Second string is texture path 
 		*/
+		[[deprecated]]
 		Material(Map<String, String>textures);
 
 		Material(String assetFilePath);
