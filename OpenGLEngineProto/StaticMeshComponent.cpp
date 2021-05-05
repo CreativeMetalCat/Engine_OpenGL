@@ -20,7 +20,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	{
 		if (Shader* sh = Owner->GetWorld()->game->GetShader(shaderName))
 		{
-			shader = *sh;
+			shader = sh;
 		}
 		material = Owner->GetWorld()->game->GetMaterial(materialName);
 	}
@@ -97,14 +97,14 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	}
 
 	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::construct, Name.c_str());
-	modelViewPerspectiveMatrixId = glGetUniformLocation(shader.ProgramId, "mvp");
+	modelViewPerspectiveMatrixId = shader->GetLocation("mvp");
 	if (modelViewPerspectiveMatrixId == (uint)(Index_None))
 	{
-		printf("Shader Warning: Failed to find uniform location for MVP. Shader: %s. Component: %s \n", shader.Name.c_str(), Name.c_str());
+		printf("Shader Warning: Failed to find uniform location for MVP. Shader: %s. Component: %s \n", shader->Name.c_str(), Name.c_str());
 	}
-	modelMatrixId = glGetUniformLocation(shader.ProgramId, "model");
-	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
-	shader_AmbientLightColorId = glGetUniformLocation(shader.ProgramId, "ambient_light_color");
+	modelMatrixId = shader->GetLocation("model");
+	viewMatrixId = shader->GetLocation("view");
+	shader_AmbientLightColorId = shader->GetLocation("ambient_light_color");
 
 	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::construct, Name.c_str());
 }
@@ -123,7 +123,7 @@ glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
 	return model;
 }
 
-Shader Engine::Components::CStaticMeshComponent::GetShader() const
+Shader* Engine::Components::CStaticMeshComponent::GetShader() const
 {
 	return shader;
 }
@@ -158,7 +158,7 @@ void Engine::Components::CStaticMeshComponent::BeginDraw()
 {
 	RenderData data = Owner->GetWorld()->game->GetCurrentRenderData();
 
-	glUseProgram(shader.ProgramId);
+	shader->Use();
 
 	glUniformMatrix4fv(modelViewPerspectiveMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraPerspective * data.CameraView * getModelMatrix()));
 	glUniformMatrix4fv(viewMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraView));
@@ -170,7 +170,7 @@ void Engine::Components::CStaticMeshComponent::BeginDraw()
 
 	if (material)
 	{
-		material->Apply(shader.ProgramId);
+		material->Apply(shader->ProgramId);
 	}
 	
 }
@@ -183,5 +183,5 @@ Engine::Components::CStaticMeshComponent::~CStaticMeshComponent()
 	glDeleteBuffers(1, &uvBuffer);
 	glDeleteBuffers(1, &normalsBuffer);
 
-	shader.~Shader();
+	delete shader;
 }

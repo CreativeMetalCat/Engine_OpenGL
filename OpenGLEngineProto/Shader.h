@@ -13,6 +13,10 @@ struct Shader
 	/*Name of the shader, used for error display*/
 	String Name = "null";
 
+	inline void Use() { glUseProgram(ProgramId); }
+
+	uint GetLocation(String var);
+
 	~Shader()
 	{
 		glDeleteProgram(ProgramId);

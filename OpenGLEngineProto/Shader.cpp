@@ -31,3 +31,8 @@ ShaderRawData::~ShaderRawData()
 	VertexShaderText.~basic_string();
 	FragmentShaderText.~basic_string();
 }
+
+uint Shader::GetLocation(String var)
+{
+	return glGetUniformLocation(ProgramId, var.c_str());
+}

@@ -48,11 +48,11 @@ namespace Engine::Components
 
         LoadedMeshData mesh;
 
-        Shader shader;
+        Shader* shader;
 
         Material::Material* material;
     public:
-        Shader GetShader()const;
+        Shader* GetShader()const;
 
         CStaticMeshComponent(String name, CActor* owner, String materialName, LoadedMeshData mesh,String shaderName, Vector Location = Vector(0), Vector Rotation = Vector(0), Vector Scale = Vector(1));
 
