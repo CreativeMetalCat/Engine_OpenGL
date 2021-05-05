@@ -1,0 +1,13 @@
+{
+    "asset_info":
+    {
+        "asset_format_ver":1,
+        "type":"material"
+    },
+    "name":"test2",
+    "pixelated_filter":true,
+    "textures":
+    {
+        "texture_main":"T_WorldDefault.TGA"
+    }
+}

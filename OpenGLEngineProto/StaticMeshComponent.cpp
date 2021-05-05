@@ -11,11 +11,9 @@
 void Engine::Components::CStaticMeshComponent::construct(String materialName,String shaderName)
 {
 	glGenVertexArrays(1, &VertexArrayID);
+
 	glBindVertexArray(VertexArrayID);
-
-	glGenVertexArrays(1, &UVArrayID);
-	glBindVertexArray(UVArrayID);
-
+	
 	if (Owner)
 	{
 		if (Shader* sh = Owner->GetWorld()->game->GetShader(shaderName))
@@ -47,6 +45,29 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	{
 		printf("Error:Mesh is null! Object: %s", Name.c_str());
 	}
+	
+	if (!mesh.Data.UVs.empty())
+	{
+		glGenBuffers(1, &uvBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.Data.UVs.size(), &mesh.Data.UVs[0], GL_STATIC_DRAW);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(
+			1,                                // attribute. must match the layout in the shader.
+			2,                                // size : U+V => 2
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
+		glBindVertexArray(1);
+	}
+	else
+	{
+		printf("Error:Mesh has no uv data! Object: %s", Name.c_str());
+	}
 
 	if (!mesh.Data.Normals.empty())
 	{
@@ -69,31 +90,6 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	else
 	{
 		printf("Error:Mesh has no normals data! Object: %s", Name.c_str());
-	}
-
-
-
-	if (!mesh.Data.UVs.empty())
-	{
-		glGenBuffers(1, &uvBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * mesh.Data.UVs.size(), &mesh.Data.UVs[0], GL_STATIC_DRAW);
-
-		// 2nd attribute buffer : UVs
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(
-			1,                                // attribute. must match the layout in the shader.
-			2,                                // size : U+V => 2
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-		);
-		glBindVertexArray(1);
-	}
-	else
-	{
-		printf("Error:Mesh has no uv data! Object: %s", Name.c_str());
 	}
 
 	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::construct, Name.c_str());
@@ -137,20 +133,9 @@ Engine::Components::CStaticMeshComponent::CStaticMeshComponent(String name, CAct
 void Engine::Components::CStaticMeshComponent::EndDraw()
 {
 	glBindVertexArray(VertexArrayID);
-	glBindVertexArray(UVArrayID);
 
 	glDrawArrays(GL_TRIANGLES, 0, mesh.Data.Verticies.size());
 
-	glBindVertexArray(0);
-
-	if (!mesh.Data.UVs.empty())
-	{
-		glBindVertexArray(1);
-	}
-	if (!mesh.Data.Normals.empty())
-	{
-		glBindVertexArray(2);
-	}
 	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::BeginDraw, (Name + " Parent: " + Owner->Name).c_str());
 }
 
@@ -182,6 +167,9 @@ Engine::Components::CStaticMeshComponent::~CStaticMeshComponent()
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteBuffers(1, &uvBuffer);
 	glDeleteBuffers(1, &normalsBuffer);
+
+	glDeleteVertexArrays(1,&VertexArrayID);
+	//glDeleteVertexArrays(1,&UVArrayID);
 
 	delete shader;
 }

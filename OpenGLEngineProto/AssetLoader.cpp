@@ -4,10 +4,10 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
+#include "Macros.h"
 
 nlohmann::json Helpers::LoadAssetFile(String filename)
 {
-	// Read the Fragment Shader code from the file
 	std::string assetText;
 	std::ifstream assetStream(filename + ".asset", std::ios::in);
 	if (assetStream.is_open())
@@ -20,7 +20,8 @@ nlohmann::json Helpers::LoadAssetFile(String filename)
 
 	if (assetText == "")
 	{
-		return nlohmann::json::parse("{asset_info:{\"type\":\"none\"}}");
+		LOG(("Failed to read asset file: " + filename).c_str(), Helpers::LoadAssetFile(String filename), );
+		return nlohmann::json::parse("{\"asset_info\":{\"type\":\"none\"}}");
 	}
 	return nlohmann::json::parse(assetText);
 }
