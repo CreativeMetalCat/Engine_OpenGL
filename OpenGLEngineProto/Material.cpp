@@ -63,16 +63,16 @@ void Engine::Material::Material::Apply(uint ShaderProgramID)
 {
 	if (!textureData.empty())
 	{
-		for (int i = 0; i < textureData.size(); i++)
+		for (int i = 0; i < 1 /*textureData.size()*/; i++)
 		{
 			// Bind our texture in Texture Unit i
 			glActiveTexture(GL_TEXTURE0 + get_gl_texture_const(i));
 			glBindTexture(GL_TEXTURE_2D, textureData[i].second);
 			// Set our sampler to use Texture Unit i
 			glUniform1i(glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()), i);
+			LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Material::Material::Apply, Name.c_str());
+			//printf("%s : %i \n","texture_main", glGetUniformLocation(ShaderProgramID, textureData[i].first.c_str()));
 		}
-
-		//LOG_ERROR(glewGetErrorString(glGetError()), Engine::Material::Material::Apply, Name.c_str());
 	}
 }
 
@@ -140,9 +140,11 @@ Engine::Material::Material::Material(String assetFilePath)
 		int width;//image width
 		int comp;//channels
 
-		int filter = data["pixelated_filter"].get<bool>() ? GL_NEAREST : GL_LINEAR;
+		bool pixelFilter = data["pixelated_filter"].get<bool>();
 
 		Name = data["name"].get<std::string>();
+
+		//glEnable(GL_TEXTURE_2D);
 
 		for (auto it = data["textures"].begin(); it != data["textures"].end(); ++it)
 		{
@@ -164,11 +166,14 @@ Engine::Material::Material::Material(String assetFilePath)
 
 			glGenTextures(1, &texture.second);
 			glBindTexture(GL_TEXTURE_2D, texture.second);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, useFallBack ? nullImage : image);
+			LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
 
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, useFallBack ? nullImage : image);
+			LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
 			
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, pixelFilter ? GL_NEAREST : GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, pixelFilter ? GL_NEAREST : GL_LINEAR);
+			LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
 
 			glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -177,7 +182,7 @@ Engine::Material::Material::Material(String assetFilePath)
 
 			textureData.push_back(texture);
 
-			LOG_ERROR(glewGetErrorString(glGetError()), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
+			LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Material::Material::Material(String assetFilePath), Name.c_str());
 		}
 	}
 	else

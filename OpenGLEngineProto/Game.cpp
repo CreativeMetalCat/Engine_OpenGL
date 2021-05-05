@@ -47,6 +47,7 @@ Shader* Engine::CGame::GetShader(String name)
 	if (data.Valid)
 	{
 		shaders.push_back(data);
+		LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::CGame::GetShader(String name), "Game");
 		return new Shader((data.GenerateShader()));
 	}
     return nullptr;
@@ -77,16 +78,16 @@ Engine::Material::Material* Engine::CGame::GetMaterial(String name)
 {
 	if (!materials.empty())
 	{
-		Array<Material::Material>::const_iterator iter = std::find_if(materials.begin(), materials.end(), [name](Material::Material mat) {return mat.Name == name; });
+		Array<Material::Material*>::const_iterator iter = std::find_if(materials.begin(), materials.end(), [name](Material::Material* mat) {return mat->Name == name; });
 		if (iter != materials.end())
 		{
-			return new Material::Material(*iter);
+			return *iter;
 		}
 	}
 
 	//we don't have this asset loaded yet -> try to load it and it doesn't matter if loading found the result, because material has fallback methods
 	Material::Material* mat = new Material::Material("Materials/"+name);
-	materials.push_back(*mat);
+	materials.push_back(mat);
 
 	return mat;
 }
@@ -143,6 +144,8 @@ bool Engine::CGame::CreateWindow(std::string name, int height, int width)
 
 	// Hide the mouse and enable unlimited mouvement
 	glfwSetInputMode(window, GLFW_CURSOR, MouseMode::Hidden);
+
+	
 }
 
 void Engine::CGame::Run()

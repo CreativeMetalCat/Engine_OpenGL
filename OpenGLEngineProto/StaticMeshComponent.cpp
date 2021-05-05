@@ -96,7 +96,7 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 		printf("Error:Mesh has no uv data! Object: %s", Name.c_str());
 	}
 
-
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::construct, Name.c_str());
 	modelViewPerspectiveMatrixId = glGetUniformLocation(shader.ProgramId, "mvp");
 	if (modelViewPerspectiveMatrixId == (uint)(Index_None))
 	{
@@ -105,6 +105,8 @@ void Engine::Components::CStaticMeshComponent::construct(String materialName,Str
 	modelMatrixId = glGetUniformLocation(shader.ProgramId, "model");
 	viewMatrixId = glGetUniformLocation(shader.ProgramId, "view");
 	shader_AmbientLightColorId = glGetUniformLocation(shader.ProgramId, "ambient_light_color");
+
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::construct, Name.c_str());
 }
 
 glm::mat4 Engine::Components::CStaticMeshComponent::getModelMatrix() const
@@ -149,14 +151,13 @@ void Engine::Components::CStaticMeshComponent::EndDraw()
 	{
 		glBindVertexArray(2);
 	}
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::BeginDraw, (Name + " Parent: " + Owner->Name).c_str());
 }
 
 void Engine::Components::CStaticMeshComponent::BeginDraw()
 {
 	RenderData data = Owner->GetWorld()->game->GetCurrentRenderData();
 
-	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::BeginDraw, (Name + " Parent: " + Owner->Name).c_str());
-	
 	glUseProgram(shader.ProgramId);
 
 	glUniformMatrix4fv(modelViewPerspectiveMatrixId, 1, GL_FALSE, glm::value_ptr(data.CameraPerspective * data.CameraView * getModelMatrix()));
@@ -165,10 +166,13 @@ void Engine::Components::CStaticMeshComponent::BeginDraw()
 
 	glUniform3f(shader_AmbientLightColorId, data.AmbientLightColor.r, data.AmbientLightColor.b, data.AmbientLightColor.g);
 
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Engine::Components::CStaticMeshComponent::BeginDraw, (Name + " Parent: " + Owner->Name).c_str());
+
 	if (material)
 	{
 		material->Apply(shader.ProgramId);
 	}
+	
 }
 
 Engine::Components::CStaticMeshComponent::~CStaticMeshComponent()

@@ -32,7 +32,7 @@ namespace Engine
 		Array<ShaderRawData> shaders = Array<ShaderRawData>();
 
 		/*Array of currently loaded materials. Used simplify access to materils and to avoid loading same textures for same materials more then once*/
-		Array<Material::Material> materials = Array<Material::Material>();
+		Array<Material::Material*> materials = Array<Material::Material*>();
 
 		/*Render data from current camera*/
 		RenderData currentRenderData;

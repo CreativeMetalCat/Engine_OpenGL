@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <sstream>
 
+#include "Macros.h"
 GLuint Helpers::LoadShaders(const char* vertex_file_path, const char* fragment_file_path) 
 {
 	//Create shaders for output
@@ -168,6 +169,7 @@ uint Helpers::LoadShaders(String vertText, String fragText)
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
 
+	LOG_ERROR(glewGetErrorString(err), glGetError(), Helpers::LoadShaders(String vertText, String fragText), "Static Shader Loader");
 	return ProgramID;
 }
 

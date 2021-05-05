@@ -17,6 +17,10 @@ namespace Engine::Material
 		//Array of pairs with key being location that texture will be binded to and value being the texture itself
 		Map<String, uint> textureData;
 	public:
+		Material(const Material&) = delete;
+
+		Material& operator=(const Material&) = delete;
+		
 		String Name;
 
 		
